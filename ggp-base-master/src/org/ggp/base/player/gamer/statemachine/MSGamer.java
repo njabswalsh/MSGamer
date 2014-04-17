@@ -58,7 +58,7 @@ public class MSGamer extends StateMachineGamer {
 
 	@Override
 	public String getName() {
-		return "SGamer";
+		return "MSGamer";
 	}
 
 }
