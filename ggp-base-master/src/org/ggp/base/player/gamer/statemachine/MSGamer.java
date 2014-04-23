@@ -1,5 +1,6 @@
 package org.ggp.base.player.gamer.statemachine;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -27,6 +28,26 @@ public class MSGamer extends StateMachineGamer {
 			GoalDefinitionException {
 		// TODO Auto-generated method stub
 
+	}
+
+	private int maxscore(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
+		StateMachine stateMachine = getStateMachine();
+
+		List<Integer> goals;
+
+		if (stateMachine.isTerminal(state)) goals = stateMachine.getGoals(state);
+
+		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
+
+
+		int score = 0;
+		for (int i = 0; i < legalMoves.size(); i++) {
+			List<Move> testMove = new ArrayList<Move>();
+			testMove.add(legalMoves.get(i));
+			int result = maxscore(role, stateMachine.getNextState(state, testMove));
+			if (result>score) score = result;
+		}
+		return score;
 	}
 
 	@Override
