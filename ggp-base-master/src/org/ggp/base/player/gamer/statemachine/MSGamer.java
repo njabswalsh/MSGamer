@@ -30,7 +30,7 @@ public class MSGamer extends StateMachineGamer {
 	}
 
 
-	private int minscore(Role role, Move action, MachineState state, int alpha, int beta) throws MoveDefinitionException {
+	private int minscore(Role role, Move action, MachineState state, int alpha, int beta) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException {
 		StateMachine stateMachine = getStateMachine();
 		List<Role> players = stateMachine.getRoles();
 		Role opponent = players.get(0);
@@ -48,33 +48,35 @@ public class MSGamer extends StateMachineGamer {
 				testMove.add(action);
 			}
 			MachineState newstate = stateMachine.getNextState(state, testMove);
-			int result = maxscore(role, newstate, alpha, beta);
+			int result = maxscoreForMultiPlayer(role, newstate, alpha, beta);
 			beta = Math.min(beta, result);
 			if (beta <= alpha) return alpha;
 		}
 		return beta;
 	}
 
-
-	private int maxscore(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
+	private int maxscoreForSinglePlayer(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		StateMachine stateMachine = getStateMachine();
+		List<Integer> goals;
+
 		if (stateMachine.isTerminal(state)) {
-			List<Integer> goals = stateMachine.getGoals(state);
+			goals = stateMachine.getGoals(state);
 			return goals.get(0);
 		}
+
 		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
 		int score = 0;
+
 		for (int i = 0; i < legalMoves.size(); i++) {
 			List<Move> testMove = new ArrayList<Move>();
 			testMove.add(legalMoves.get(i));
-			int result = maxscore(role, stateMachine.getNextState(state, testMove));
+			int result = maxscoreForSinglePlayer(role, stateMachine.getNextState(state, testMove));
 			if (result>score) score = result;
 		}
 		return score;
 	}
 
-
-	public Move getBestMoveFromCurrentState(Role role, MachineState currentState, StateMachine stateMachine) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
+	public Move getBestMoveForSinglePlayer(Role role, MachineState currentState, StateMachine stateMachine) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
 		List<Move> legalMoves = stateMachine.getLegalMoves(currentState, role);
 		Move bestMove = legalMoves.get(0);
@@ -83,7 +85,7 @@ public class MSGamer extends StateMachineGamer {
 	    {
 			List<Move> nextMove = new ArrayList<Move>();
 			nextMove.add(legalMoves.get(i));
-			int result = maxscore(role, stateMachine.getNextState(currentState, nextMove));
+			int result = maxscoreForSinglePlayer(role, stateMachine.getNextState(currentState, nextMove));
 			if (result == 100)
 			{
 				return legalMoves.get(i);
@@ -97,6 +99,52 @@ public class MSGamer extends StateMachineGamer {
 		return bestMove;
 	}
 
+	private int maxscoreForMultiPlayer(Role role, MachineState state, int alpha, int beta) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
+		StateMachine stateMachine = getStateMachine();
+		List<Integer> goals;
+
+		if (stateMachine.isTerminal(state)) {
+			goals = stateMachine.getGoals(state);
+			return goals.get(0);
+		}
+
+		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
+		int score = 0;
+
+		for (int i = 0; i < legalMoves.size(); i++) {
+			int result = minscore(role, legalMoves.get(i), state, alpha, beta);
+			alpha = Math.max(alpha, result);
+			if (alpha >= beta) return beta;
+		}
+		return alpha;
+	}
+
+	public Move getBestMoveForMultiPlayer(Role role, MachineState currentState, StateMachine stateMachine) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
+	{
+		List<Move> legalMoves = stateMachine.getLegalMoves(currentState, role);
+		Move bestMove = legalMoves.get(0);
+		int score = 0;
+		for (int i = 0; i < legalMoves.size(); i++)
+	    {
+			List<Move> nextMove = new ArrayList<Move>();
+			nextMove.add(legalMoves.get(i));
+			int result = minscore(role, legalMoves.get(i), currentState, 0, 100);
+			if (result == 100)
+			{
+				return legalMoves.get(i);
+			}
+			if (result > score)
+			{
+				score = result;
+				bestMove = legalMoves.get(i);
+			}
+		}
+		return bestMove;
+	}
+
+
+
+
 	@Override
 	public Move stateMachineSelectMove(long timeout)
 			throws TransitionDefinitionException, MoveDefinitionException,
@@ -104,9 +152,11 @@ public class MSGamer extends StateMachineGamer {
 		StateMachine stateMachine = getStateMachine();
 		MachineState currentState = getCurrentState();
 		Role role = getRole();
-
-		return getBestMoveFromCurrentState(role, currentState, stateMachine);
+		if(stateMachine.getRoles().size() == 1)
+			return getBestMoveForSinglePlayer(role, currentState, stateMachine);
+		else return getBestMoveForMultiPlayer(role, currentState, stateMachine);
 	}
+
 
 	@Override
 	public void stateMachineStop() {
