@@ -78,7 +78,7 @@ public class MSGamer extends StateMachineGamer {
 		List<Integer> goals;
 		List<Role> players = stateMachine.getRoles();
 		int playerNumber = 0;
-		if (players.get(0).equals(role)) {
+		if (players.get(1).equals(role)) {
 			playerNumber = 1;
 		}
 		if (stateMachine.isTerminal(state)) {
