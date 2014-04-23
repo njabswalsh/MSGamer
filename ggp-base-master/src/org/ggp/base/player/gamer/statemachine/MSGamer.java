@@ -2,7 +2,6 @@ package org.ggp.base.player.gamer.statemachine;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.ggp.base.player.gamer.exception.GamePreviewException;
 import org.ggp.base.util.game.Game;
@@ -30,6 +29,7 @@ public class MSGamer extends StateMachineGamer {
 
 	}
 
+<<<<<<< HEAD
 	private int maxscore(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		StateMachine stateMachine = getStateMachine();
 
@@ -48,6 +48,29 @@ public class MSGamer extends StateMachineGamer {
 			if (result>score) score = result;
 		}
 		return score;
+=======
+	public Move getBestMoveFromCurrentState(Role role, MachineState currentState, StateMachine stateMachine) throws MoveDefinitionException
+	{
+		List<Move> legalMoves = stateMachine.getLegalMoves(currentState, role);
+		Move bestMove = legalMoves.get(0);
+		int score = 0;
+		for (int i = 0; i < legalMoves.size(); i++)
+	    {
+			List<Move> nextMove = new ArrayList<Move>();
+			nextMove.add(legalMoves.get(i));
+			int result = maxscore(role, stateMachine.getNextState(currentState, nextMove));
+			if (result == 100)
+			{
+				return legalMoves.get(i);
+			}
+			if (result > score)
+			{
+				score = result;
+				bestMove = legalMoves.get(i);
+			}
+		}
+		return bestMove;
+>>>>>>> FETCH_HEAD
 	}
 
 	@Override
@@ -57,9 +80,8 @@ public class MSGamer extends StateMachineGamer {
 		StateMachine stateMachine = getStateMachine();
 		MachineState currentState = getCurrentState();
 		Role role = getRole();
-		List<Move> legalMoves = stateMachine.getLegalMoves(currentState, role);
-		Random r = new Random();
-		return legalMoves.get(r.nextInt((legalMoves.size())));
+
+		return getBestMoveFromCurrentState(role, currentState, stateMachine);
 	}
 
 	@Override
