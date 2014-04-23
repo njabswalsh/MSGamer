@@ -29,32 +29,6 @@ public class MSGamer extends StateMachineGamer {
 
 	}
 
-
-	private int minscore(Role role, Move action, MachineState state, int alpha, int beta) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException {
-		StateMachine stateMachine = getStateMachine();
-		List<Role> players = stateMachine.getRoles();
-		Role opponent = players.get(0);
-		if (players.get(0) == role) {
-			opponent = players.get(1);
-		}
-		List<Move> actions = stateMachine.getLegalMoves(state, opponent);
-		for (int i = 0; i < actions.size(); i++) {
-			List<Move> testMove = new ArrayList<Move>();
-			if (role ==players.get(0)) {
-				testMove.add(action);
-				testMove.add(actions.get(i));
-			} else {
-				testMove.add(actions.get(i));
-				testMove.add(action);
-			}
-			MachineState newstate = stateMachine.getNextState(state, testMove);
-			int result = maxscoreForMultiPlayer(role, newstate, alpha, beta);
-			beta = Math.min(beta, result);
-			if (beta <= alpha) return alpha;
-		}
-		return beta;
-	}
-
 	private int maxscoreForSinglePlayer(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		StateMachine stateMachine = getStateMachine();
 		List<Integer> goals;
@@ -109,7 +83,6 @@ public class MSGamer extends StateMachineGamer {
 		}
 
 		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
-		int score = 0;
 
 		for (int i = 0; i < legalMoves.size(); i++) {
 			int result = minscore(role, legalMoves.get(i), state, alpha, beta);
@@ -119,15 +92,40 @@ public class MSGamer extends StateMachineGamer {
 		return alpha;
 	}
 
+	private int minscore(Role role, Move action, MachineState state, int alpha, int beta) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException {
+		StateMachine stateMachine = getStateMachine();
+		List<Role> players = stateMachine.getRoles();
+		Role opponent = players.get(0);
+		if (players.get(0).equals(role)) {
+			opponent = players.get(1);
+		}
+		List<Move> actions = stateMachine.getLegalMoves(state, opponent);
+		for (int i = 0; i < actions.size(); i++) {
+			List<Move> testMove = new ArrayList<Move>();
+			if (role == players.get(0)) {
+				testMove.add(action);
+				testMove.add(actions.get(i));
+			} else {
+				testMove.add(actions.get(i));
+				testMove.add(action);
+			}
+			MachineState newstate = stateMachine.getNextState(state, testMove);
+			int result = maxscoreForMultiPlayer(role, newstate, alpha, beta);
+			beta = Math.min(beta, result);
+			if (beta <= alpha) return alpha;
+		}
+		return beta;
+	}
+
 	public Move getBestMoveForMultiPlayer(Role role, MachineState currentState, StateMachine stateMachine) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
+//		System.out.println("Getting best Multiplayer move.");
+//		System.out.println("Role is: " + role);
 		List<Move> legalMoves = stateMachine.getLegalMoves(currentState, role);
 		Move bestMove = legalMoves.get(0);
 		int score = 0;
 		for (int i = 0; i < legalMoves.size(); i++)
 	    {
-			List<Move> nextMove = new ArrayList<Move>();
-			nextMove.add(legalMoves.get(i));
 			int result = minscore(role, legalMoves.get(i), currentState, 0, 100);
 			if (result == 100)
 			{
