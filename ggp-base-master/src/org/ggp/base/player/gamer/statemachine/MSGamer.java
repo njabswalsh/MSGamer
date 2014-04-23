@@ -34,7 +34,10 @@ public class MSGamer extends StateMachineGamer {
 
 		List<Integer> goals;
 
-		if (stateMachine.isTerminal(state)) goals = stateMachine.getGoals(state);
+		if (stateMachine.isTerminal(state)) {
+			goals = stateMachine.getGoals(state);
+			return goals.get(0);
+		}
 
 		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
 
