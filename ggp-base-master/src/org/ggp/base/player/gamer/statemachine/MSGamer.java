@@ -76,12 +76,15 @@ public class MSGamer extends StateMachineGamer {
 	private int maxscoreForMultiPlayer(Role role, MachineState state, int alpha, int beta) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		StateMachine stateMachine = getStateMachine();
 		List<Integer> goals;
-
+		List<Role> players = stateMachine.getRoles();
+		int playerNumber = 0;
+		if (players.get(0).equals(role)) {
+			playerNumber = 1;
+		}
 		if (stateMachine.isTerminal(state)) {
 			goals = stateMachine.getGoals(state);
-			return goals.get(0);
+			return goals.get(playerNumber);
 		}
-
 		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
 
 		for (int i = 0; i < legalMoves.size(); i++) {
