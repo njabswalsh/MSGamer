@@ -29,7 +29,6 @@ public class MSGamer extends StateMachineGamer {
 
 	}
 
-<<<<<<< HEAD
 	private int maxscore(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		StateMachine stateMachine = getStateMachine();
 
@@ -48,8 +47,9 @@ public class MSGamer extends StateMachineGamer {
 			if (result>score) score = result;
 		}
 		return score;
-=======
-	public Move getBestMoveFromCurrentState(Role role, MachineState currentState, StateMachine stateMachine) throws MoveDefinitionException
+	}
+
+	public Move getBestMoveFromCurrentState(Role role, MachineState currentState, StateMachine stateMachine) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
 		List<Move> legalMoves = stateMachine.getLegalMoves(currentState, role);
 		Move bestMove = legalMoves.get(0);
@@ -70,7 +70,6 @@ public class MSGamer extends StateMachineGamer {
 			}
 		}
 		return bestMove;
->>>>>>> FETCH_HEAD
 	}
 
 	@Override
