@@ -32,7 +32,7 @@ public class MSGamer extends StateMachineGamer {
 	private int maxscoreForSinglePlayer(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		StateMachine stateMachine = getStateMachine();
 		List<Integer> goals;
-
+		//System.out.println("Maxscore Single Player");
 		if (stateMachine.isTerminal(state)) {
 			goals = stateMachine.getGoals(state);
 			return goals.get(0);
@@ -75,6 +75,7 @@ public class MSGamer extends StateMachineGamer {
 
 	private int maxscoreForMultiPlayer(Role role, MachineState state, int alpha, int beta) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		StateMachine stateMachine = getStateMachine();
+		//System.out.println("Maxscore");
 		List<Integer> goals;
 		List<Role> players = stateMachine.getRoles();
 		int playerNumber = 0;
@@ -96,6 +97,7 @@ public class MSGamer extends StateMachineGamer {
 	}
 
 	private int minscore(Role role, Move action, MachineState state, int alpha, int beta) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException {
+		//System.out.println("Minscore");
 		StateMachine stateMachine = getStateMachine();
 		List<Role> players = stateMachine.getRoles();
 		Role opponent = players.get(0);
@@ -155,7 +157,8 @@ public class MSGamer extends StateMachineGamer {
 		Role role = getRole();
 		if(stateMachine.getRoles().size() == 1)
 			return getBestMoveForSinglePlayer(role, currentState, stateMachine);
-		else return getBestMoveForMultiPlayer(role, currentState, stateMachine);
+		else
+			return getBestMoveForMultiPlayer(role, currentState, stateMachine);
 	}
 
 
