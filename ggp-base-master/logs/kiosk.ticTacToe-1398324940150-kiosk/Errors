@@ -1,0 +1,19 @@
+LOG 1398324940880 [L9]: <ERR> (in GamePlayer) There are no legal moves defined for oplayer in [( true ( control oplayer ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getLegalMoves(ProverStateMachine.java:90)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.minscore(MSGamer.java:107)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMoveForMultiPlayer(MSGamer.java:134)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:161)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1398324940902 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: There are no legal moves defined for oplayer in [( true ( control oplayer ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: There are no legal moves defined for oplayer in [( true ( control oplayer ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getLegalMoves(ProverStateMachine.java:90)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.minscore(MSGamer.java:107)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMoveForMultiPlayer(MSGamer.java:134)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:161)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
