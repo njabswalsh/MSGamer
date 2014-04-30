@@ -20,8 +20,8 @@ public class MSGamer extends StateMachineGamer {
 	private static final long serverTimeBuffer = 1000;
 	private static final boolean debug = false;
 	private static final boolean useDepthLimit = true;
-	private static final int depthLimit = 3;
 	private static final int MonteCarloCount = 4;
+	private int depthLimit = 1;
 	private long timeout = 0;
 	private List<Role> players;
 	private int playerNumber;
@@ -199,28 +199,36 @@ public class MSGamer extends StateMachineGamer {
 	{
 		List<Move> legalMoves = stateMachine.getLegalMoves(currentState, role);
 		Move bestMove = legalMoves.get(0);
+		Move bestMoveFromPastLevel = bestMove;
 		int score = 0;
 		if(legalMoves.size() > 1)
-		for (int i = 0; i < legalMoves.size(); i++)
-	    {
-			if(timedOut())
+		{
+			while (true)
 			{
-				return bestMove;
-			}
-			int result = minscore(role, legalMoves.get(i), currentState, 0, 100, 0);
-			if (result == 100)
-			{
-				//System.out.println("Found winning move: " + legalMoves.get(i));
-				return legalMoves.get(i);
-			}
-			if (result > score)
-			{
-				score = result;
-				bestMove = legalMoves.get(i);
-				//System.out.println("Best score: " + score + " Best move: " + bestMove);
+				for (int i = 0; i < legalMoves.size(); i++)
+			    {
+					if(timedOut())
+					{
+						return bestMoveFromPastLevel;
+					}
+					int result = minscore(role, legalMoves.get(i), currentState, 0, 100, 0);
+					if (result == 100)
+					{
+						//System.out.println("Found winning move: " + legalMoves.get(i));
+						return legalMoves.get(i);
+					}
+					if (result > score)
+					{
+						score = result;
+						bestMove = legalMoves.get(i);
+						//System.out.println("Best score: " + score + " Best move: " + bestMove);
+					}
+				}
+				bestMoveFromPastLevel = bestMove;
+				depthLimit++;
 			}
 		}
-		return bestMove;
+		return bestMoveFromPastLevel;
 	}
 
 	@Override
