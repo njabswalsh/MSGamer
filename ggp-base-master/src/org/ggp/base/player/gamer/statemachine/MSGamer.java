@@ -2,6 +2,7 @@ package org.ggp.base.player.gamer.statemachine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.ggp.base.player.gamer.exception.GamePreviewException;
 import org.ggp.base.util.game.Game;
@@ -20,10 +21,12 @@ public class MSGamer extends StateMachineGamer {
 	private static final boolean debug = false;
 	private static final boolean useDepthLimit = true;
 	private static final int depthLimit = 3;
+	private static final int MonteCarloCount = 4;
 	private long timeout = 0;
 	private List<Role> players;
 	private int playerNumber;
 	private Role role;
+	private Random r = new Random();
 	StateMachine stateMachine;
 	@Override
 	public StateMachine getInitialStateMachine()
@@ -74,6 +77,43 @@ public class MSGamer extends StateMachineGamer {
 		return 100 - legalMoves.size();
 	}
 
+	private int monteCarlo(Role role, MachineState state, int count) throws GoalDefinitionException, MoveDefinitionException
+	{
+		int total = 0;
+		for(int i = 0; i < count; i++)
+		{
+			total = total + depthCharge(role, state);
+		}
+		return total / count;
+	}
+
+	private int depthCharge(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException {
+		if (stateMachine.isTerminal(state)) {
+			return stateMachine.getGoal(state, role);
+		}
+		List<Move> moves = new ArrayList<Move>();
+		for(int i = 0; i < players.size(); i++ )
+		{
+			List<Move> actions = stateMachine.getLegalMoves(state, players.get(i));
+			moves.add(actions.get(r.nextInt(actions.size())));
+		}
+		MachineState next = null;
+		try
+		{
+			next = stateMachine.getNextState(state, moves);
+		} catch (TransitionDefinitionException e) {
+			e.printStackTrace();
+		}
+		return depthCharge(role, next);
+	}
+//	function depthcharge (role,state)
+//	 {if (findterminalp(state,game)) {return findreward(role,state,game)};
+//	  var move = seq();
+//	  for (var i=0; i<roles.length; i++)
+//	      {var options = findlegals(roles[i],state,game);
+//	       move[i] = randomelement(options)};
+//	  var newstate = simulate(move,state);
+//	  return depthcharge(role,newstate)}
 	@SuppressWarnings("unused")
 	private int goalProximityEval(Role role, MachineState state) throws GoalDefinitionException
 	{
@@ -82,7 +122,8 @@ public class MSGamer extends StateMachineGamer {
 
 	private int evalFunction(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException
 	{
-		return focusEval(players.get(playerNumber ^ 1), state);
+		return monteCarlo(role, state, MonteCarloCount);
+		//return focusEval(players.get(playerNumber ^ 1), state);
 		//return goalProximityEval(role, state);
 	}
 
