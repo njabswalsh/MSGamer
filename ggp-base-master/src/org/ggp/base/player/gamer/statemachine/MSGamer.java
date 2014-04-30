@@ -59,17 +59,17 @@ public class MSGamer extends StateMachineGamer {
 		return returnVal;
 	}
 
-	private int depth_minscore(Role role, Move action, MachineState state, int alpha, int beta, int level) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
+	private int minscore(Role role, Move action, MachineState state, int alpha, int beta, int level) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
 		List<Move> move = new ArrayList<Move>(players.size());
 		for(int i = 0; i < players.size(); i ++)
 		{
 			move.add(new Move(null));
 		}
-		return depth_minscore(role, action, state, alpha, beta, move , 0, level);
+		return minscore(role, action, state, alpha, beta, move , 0, level);
 	}
 
-	private int depth_minscore(Role role, Move action, MachineState state, int alpha, int beta, List<Move> move, int playerIndex, int level) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
+	private int minscore(Role role, Move action, MachineState state, int alpha, int beta, List<Move> move, int playerIndex, int level) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
 		Role opponent = players.get(playerIndex);
 		List<Move> possibleActions;
@@ -92,13 +92,13 @@ public class MSGamer extends StateMachineGamer {
 			if(playerIndex == players.size() - 1)
 			{
 				MachineState newstate = stateMachine.getNextState(state, move);
-				int result = depth_maxscore(role, newstate, alpha, beta, level+1);
+				int result = maxscore(role, newstate, alpha, beta, level+1);
 				beta = Math.min(beta, result);
 				if (beta <= alpha) { return alpha; }
 			}
 			else
 			{
-				int result = depth_minscore(role, action, state, alpha, beta, move, playerIndex + 1, level);
+				int result = minscore(role, action, state, alpha, beta, move, playerIndex + 1, level);
 				beta = Math.min(beta, result);
 				if (beta <= alpha) { return alpha; }
 			}
@@ -106,19 +106,7 @@ public class MSGamer extends StateMachineGamer {
 		return beta;
 	}
 
-	private int minscore(Role role, Move action, MachineState state, int alpha, int beta) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
-	{
-		List<Move> move = new ArrayList<Move>(players.size());
-		for(int i = 0; i < players.size(); i ++)
-		{
-			move.add(new Move(null));
-		}
-		return minscore(role, action, state, alpha, beta, move , 0);
-	}
-
-
-
-	private int depth_maxscore(Role role, MachineState state, int alpha, int beta, int level) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException
+	private int maxscore(Role role, MachineState state, int alpha, int beta, int level) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException
 	{
 		if (stateMachine.isTerminal(state)) {
 			return stateMachine.getGoals(state).get(playerNumber);
@@ -130,68 +118,12 @@ public class MSGamer extends StateMachineGamer {
 			{
 				return alpha;
 			}
-			int result = depth_minscore(role, legalMoves.get(i), state, alpha, beta, level);
+			int result = minscore(role, legalMoves.get(i), state, alpha, beta, level);
 			alpha = Math.max(alpha, result);
 			if (alpha >= beta) { return beta; }
 		}
 		return alpha;
 
-	}
-
-
-	private int maxscore(Role role, MachineState state, int alpha, int beta) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException
-	{
-		if (stateMachine.isTerminal(state)) {
-			return stateMachine.getGoals(state).get(playerNumber);
-		}
-		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
-		for (int i = 0; i < legalMoves.size(); i++) {
-			if(timedOut())
-			{
-				return alpha;
-			}
-			int result = minscore(role, legalMoves.get(i), state, alpha, beta);
-			alpha = Math.max(alpha, result);
-			if (alpha >= beta) { return beta; }
-		}
-		return alpha;
-	}
-
-	private int minscore(Role role, Move action, MachineState state, int alpha, int beta, List<Move> move, int playerIndex) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
-	{
-		Role opponent = players.get(playerIndex);
-		List<Move> possibleActions;
-		if(opponent.equals(role))
-		{
-			possibleActions = new ArrayList<Move>();
-			possibleActions.add(action);
-		}
-		else
-		{
-			possibleActions = stateMachine.getLegalMoves(state, opponent);
-		}
-		for (int i = 0; i < possibleActions.size(); i++)
-		{
-			if(timedOut())
-			{
-				return beta;
-			}
-			move.set(playerIndex, possibleActions.get(i));
-			if(playerIndex == players.size() - 1)
-			{
-				MachineState newstate = stateMachine.getNextState(state, move);
-				int result = maxscore(role, newstate, alpha, beta);
-				beta = Math.min(beta, result);
-				if (beta <= alpha) { return alpha; }
-			}
-			else
-			{
-				int result = minscore(role, action, state, alpha, beta, move, playerIndex + 1);
-				beta = Math.min(beta, result);
-				if (beta <= alpha) { return alpha; }
-			}
-		}
-		return beta;
 	}
 
 	public Move getBestMove(Role role, MachineState currentState, StateMachine stateMachine) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
@@ -206,7 +138,7 @@ public class MSGamer extends StateMachineGamer {
 			{
 				return bestMove;
 			}
-			int result = depth_minscore(role, legalMoves.get(i), currentState, 0, 100, 0);
+			int result = minscore(role, legalMoves.get(i), currentState, 0, 100, 0);
 			if (result == 100)
 			{
 				//System.out.println("Found winning move: " + legalMoves.get(i));
