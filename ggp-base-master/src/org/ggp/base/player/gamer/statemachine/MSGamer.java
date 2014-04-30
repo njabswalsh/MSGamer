@@ -59,6 +59,13 @@ public class MSGamer extends StateMachineGamer {
 		return returnVal;
 	}
 
+
+	private int mobilityEval(Role role, MachineState state) throws MoveDefinitionException {
+		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
+		return legalMoves.size();
+	}
+
+
 	private int minscore(Role role, Move action, MachineState state, int alpha, int beta, int level) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
 		List<Move> move = new ArrayList<Move>(players.size());
@@ -68,6 +75,8 @@ public class MSGamer extends StateMachineGamer {
 		}
 		return minscore(role, action, state, alpha, beta, move , 0, level);
 	}
+
+
 
 	private int minscore(Role role, Move action, MachineState state, int alpha, int beta, List<Move> move, int playerIndex, int level) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
