@@ -21,7 +21,8 @@ public class MSGamer extends StateMachineGamer {
 	private static final boolean debug = false;
 	private static final boolean useDepthLimit = true;
 	private static final int MonteCarloCount = 4;
-	private int depthLimit = 1;
+	private static final int depthIncrement = 1;
+	private int depthLimit = 2;
 	private long timeout = 0;
 	private List<Role> players;
 	private int playerNumber;
@@ -84,7 +85,7 @@ public class MSGamer extends StateMachineGamer {
 		{
 			total = total + depthCharge(role, state);
 		}
-		return total / count;
+		return (total / count );
 	}
 
 	private int depthCharge(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException {
@@ -115,7 +116,7 @@ public class MSGamer extends StateMachineGamer {
 
 	private int evalFunction(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException
 	{
-		return monteCarlo(role, state, MonteCarloCount);
+		return monteCarlo(role, state, MonteCarloCount) - 1;
 		//return focusEval(players.get(playerNumber ^ 1), state);
 		//return goalProximityEval(role, state);
 	}
@@ -154,7 +155,7 @@ public class MSGamer extends StateMachineGamer {
 			{
 				MachineState newstate = stateMachine.getNextState(state, move);
 
-				int result = maxscore(role, newstate, alpha, beta, level+1);
+				int result = maxscore(role, newstate, alpha, beta, level + 1);
 				beta = Math.min(beta, result);
 				if (beta <= alpha) { return alpha; }
 			}
@@ -176,10 +177,10 @@ public class MSGamer extends StateMachineGamer {
 		if (level >= depthLimit && useDepthLimit) return evalFunction(role, state);
 		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
 		for (int i = 0; i < legalMoves.size(); i++) {
-			if(timedOut())
-			{
-				return alpha;
-			}
+//			if(timedOut())
+//			{
+//				return alpha;
+//			}
 			int result = minscore(role, legalMoves.get(i), state, alpha, beta, level);
 			alpha = Math.max(alpha, result);
 			if (alpha >= beta) { return beta; }
@@ -202,6 +203,8 @@ public class MSGamer extends StateMachineGamer {
 			    {
 					if(timedOut())
 					{
+						//System.out.println("Depth: " + depthLimit);
+						depthLimit = 1;
 						return bestMoveFromPastLevel;
 					}
 					int result = minscore(role, legalMoves.get(i), currentState, 0, 100, 0);
@@ -218,7 +221,7 @@ public class MSGamer extends StateMachineGamer {
 					}
 				}
 				bestMoveFromPastLevel = bestMove;
-				depthLimit++;
+				depthLimit += depthIncrement;
 			}
 		}
 		return bestMoveFromPastLevel;
