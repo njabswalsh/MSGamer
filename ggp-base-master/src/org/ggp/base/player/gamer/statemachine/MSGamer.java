@@ -106,14 +106,7 @@ public class MSGamer extends StateMachineGamer {
 		}
 		return depthCharge(role, next);
 	}
-//	function depthcharge (role,state)
-//	 {if (findterminalp(state,game)) {return findreward(role,state,game)};
-//	  var move = seq();
-//	  for (var i=0; i<roles.length; i++)
-//	      {var options = findlegals(roles[i],state,game);
-//	       move[i] = randomelement(options)};
-//	  var newstate = simulate(move,state);
-//	  return depthcharge(role,newstate)}
+
 	@SuppressWarnings("unused")
 	private int goalProximityEval(Role role, MachineState state) throws GoalDefinitionException
 	{
