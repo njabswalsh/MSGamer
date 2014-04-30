@@ -19,7 +19,7 @@ public class MSGamer extends StateMachineGamer {
 	private static final long serverTimeBuffer = 1000;
 	private static final boolean debug = false;
 	private static final boolean useDepthLimit = true;
-	private static final int depthLimit = 9;
+	private static final int depthLimit = 5;
 	private long timeout = 0;
 	private List<Role> players;
 	private int playerNumber;
@@ -101,6 +101,7 @@ public class MSGamer extends StateMachineGamer {
 			if(playerIndex == players.size() - 1)
 			{
 				MachineState newstate = stateMachine.getNextState(state, move);
+
 				int result = maxscore(role, newstate, alpha, beta, level+1);
 				beta = Math.min(beta, result);
 				if (beta <= alpha) { return alpha; }
@@ -118,7 +119,7 @@ public class MSGamer extends StateMachineGamer {
 	private int maxscore(Role role, MachineState state, int alpha, int beta, int level) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException
 	{
 		if (stateMachine.isTerminal(state)) {
-			return stateMachine.getGoals(state).get(playerNumber);
+			return stateMachine.getGoal(state, role);
 		}
 		if (level >= depthLimit && useDepthLimit) return 0;
 		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
