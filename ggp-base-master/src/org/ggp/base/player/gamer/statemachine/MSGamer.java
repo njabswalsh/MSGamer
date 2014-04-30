@@ -19,7 +19,7 @@ public class MSGamer extends StateMachineGamer {
 	private static final long serverTimeBuffer = 1000;
 	private static final boolean debug = false;
 	private static final boolean useDepthLimit = true;
-	private static final int depthLimit = 5;
+	private static final int depthLimit = 3;
 	private long timeout = 0;
 	private List<Role> players;
 	private int playerNumber;
@@ -53,30 +53,48 @@ public class MSGamer extends StateMachineGamer {
 		return -1;
 	}
 
-	private boolean timedOut() {
+	private boolean timedOut()
+	{
 		boolean returnVal = System.currentTimeMillis() + serverTimeBuffer > timeout && !debug;
 		if(returnVal) System.out.println("Timed out");
 		return returnVal;
 	}
 
-
-	private int mobilityEval(Role role, MachineState state) throws MoveDefinitionException {
+	@SuppressWarnings("unused")
+	private int mobilityEval(Role role, MachineState state) throws MoveDefinitionException
+	{
 		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
 		return legalMoves.size();
 	}
 
+	@SuppressWarnings("unused")
+	private int focusEval(Role role, MachineState state) throws MoveDefinitionException
+	{
+		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
+		return 100 - legalMoves.size();
+	}
+
+	@SuppressWarnings("unused")
+	private int goalProximityEval(Role role, MachineState state) throws GoalDefinitionException
+	{
+		return stateMachine.getGoal(state, role);
+	}
+
+	private int evalFunction(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException
+	{
+		return focusEval(players.get(playerNumber ^ 1), state);
+		//return goalProximityEval(role, state);
+	}
 
 	private int minscore(Role role, Move action, MachineState state, int alpha, int beta, int level) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
 		List<Move> move = new ArrayList<Move>(players.size());
 		for(int i = 0; i < players.size(); i ++)
 		{
-			move.add(new Move(null));
+			move.add(null);
 		}
 		return minscore(role, action, state, alpha, beta, move , 0, level);
 	}
-
-
 
 	private int minscore(Role role, Move action, MachineState state, int alpha, int beta, List<Move> move, int playerIndex, int level) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
@@ -121,7 +139,7 @@ public class MSGamer extends StateMachineGamer {
 		if (stateMachine.isTerminal(state)) {
 			return stateMachine.getGoal(state, role);
 		}
-		if (level >= depthLimit && useDepthLimit) return 0;
+		if (level >= depthLimit && useDepthLimit) return evalFunction(role, state);
 		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
 		for (int i = 0; i < legalMoves.size(); i++) {
 			if(timedOut())
