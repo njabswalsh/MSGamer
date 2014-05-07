@@ -69,8 +69,11 @@ public class MSGamer extends StateMachineGamer {
 
 	private GameNode select(GameNode node)
 	{
-		while(node.visits != 0)
+		int level = 0;
+		while(true)
 		{
+			if(node.visits == 0 || stateMachine.isTerminal(node.state)) return node;
+
 			for (int i = 0; i < node.children.size(); i++)
 			{
 				if(node.children.get(i).visits == 0)
@@ -90,34 +93,37 @@ public class MSGamer extends StateMachineGamer {
 				}
 			}
 			node = result;
+			level++;
+			if(level % 500 == 0)
+			{
+				System.out.println("Select level: " + level);
+			}
 		}
-		return node;
 	}
 
 	private double selectfn(GameNode node) {
 		return (node.utility / node.visits) + explorationConstant * Math.sqrt(2 * Math.log(node.parent.visits) / node.visits);
 	}
 
-	private void expand(GameNode node) throws MoveDefinitionException, TransitionDefinitionException
+	private boolean expand(GameNode node) throws MoveDefinitionException, TransitionDefinitionException
 	{
-		if(!stateMachine.isTerminal(node.state))
+		if(stateMachine.isTerminal(node.state)) return false;
+		List<Move> actions = stateMachine.getLegalMoves(node.state, role);
+		for(int i = 0; i < actions.size(); i++)
 		{
-			List<Move> actions = stateMachine.getLegalMoves(node.state, role);
-			for(int i = 0; i < actions.size(); i++)
-			{
-				List<Move> moves = new ArrayList<Move>();
-				moves.add(actions.get(i));
-				MachineState newstate = stateMachine.getNextState(node.state, moves);
-				GameNode newNode = new GameNode(newstate, node, actions.get(i));
-				node.children.add(newNode);
-			}
+			List<Move> moves = new ArrayList<Move>();
+			moves.add(actions.get(i));
+			MachineState newstate = stateMachine.getNextState(node.state, moves);
+			GameNode newNode = new GameNode(newstate, node, actions.get(i));
+			node.children.add(newNode);
 		}
+		return true;
 	}
 
 	private void backpropagate(GameNode node, int score)
 	{
+		node.utility = (node.utility * node.visits + score) / (node.visits + 1);
 		node.visits++;
-		node.utility = node.utility + score;
 		if(node.parent != null) backpropagate(node.parent, score);
 	}
 
@@ -245,7 +251,7 @@ public class MSGamer extends StateMachineGamer {
 		{
 			if(nodeCount % 1000 == 0) System.out.println("Nodecount: " + nodeCount + " Free memory: " + Runtime.getRuntime().freeMemory());
 			GameNode node = select(gameTree);
-			expand(node);
+			boolean nonTerminal = expand(node);
 			int score = depthCharge(role, node.state);
 			backpropagate(node, score);
 			nodeCount++;
@@ -256,10 +262,10 @@ public class MSGamer extends StateMachineGamer {
 		Move bestMove = stateMachine.getRandomMove(currentState, role);
 		for(int i = 0; i < gameTree.children.size(); i++)
 		{
-			double score = gameTree.children.get(i).utility / gameTree.children.get(i).visits;
+			double score = gameTree.children.get(i).utility;
 			if(score > bestScore)
 			{
-				score = bestScore;
+				bestScore = score;
 				bestMove = gameTree.children.get(i).move;
 			}
 		}

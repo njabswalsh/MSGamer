@@ -10,7 +10,7 @@ public class GameNode {
 	GameNode parent;
 	MachineState state;
 	int visits;
-	int utility;
+	double utility;
 	List<GameNode> children;
 	Move move;
 	public GameNode(MachineState state, GameNode parent, Move move)
