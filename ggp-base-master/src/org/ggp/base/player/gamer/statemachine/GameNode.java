@@ -11,8 +11,7 @@ public class GameNode {
 	boolean isMaxNode;
 	MachineState state;
 	int visits;
-	double playerUtility;
-	double opponentUtility;
+	List<Double> utilities;
 	List<GameNode> children;
 	Move move;
 	public GameNode(MachineState state, GameNode parent, Move move, boolean isMaxNode)
@@ -22,8 +21,9 @@ public class GameNode {
 		this.state = state;
 		this.move = move;
 		this.visits = 0;
-		this.playerUtility = 0;
-		this.opponentUtility = 0;
+		this.utilities = new ArrayList<Double>();
+		this.utilities.add(0.0);
+		this.utilities.add(0.0);
 		this.children = new ArrayList<GameNode>();
 	}
 }

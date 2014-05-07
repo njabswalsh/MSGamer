@@ -88,7 +88,9 @@ public class MSGamer extends StateMachineGamer {
 			GameNode result = node;
 			for(int i = 0; i < node.children.size(); i++)
 			{
-				double newscore = selectfn(node.children.get(i));
+				int playerSelect = playerNumber;
+				if(!node.isMaxNode) playerSelect ^= 1; //TODO fix
+				double newscore = selectfn(node.children.get(i), playerSelect);
 				if(newscore > score)
 				{
 					score = newscore;
@@ -104,8 +106,8 @@ public class MSGamer extends StateMachineGamer {
 		}
 	}
 
-	private double selectfn(GameNode node) {
-		return node.playerUtility + explorationConstant * Math.sqrt(2 * Math.log(node.parent.visits) / node.visits);
+	private double selectfn(GameNode node, int playerNumber) {
+		return node.utilities.get(playerNumber) + explorationConstant * Math.sqrt(2 * Math.log(node.parent.visits) / node.visits);
 	}
 
 	private boolean expand(GameNode node) throws MoveDefinitionException, TransitionDefinitionException
@@ -161,6 +163,7 @@ public class MSGamer extends StateMachineGamer {
 		else
 		{
 			List<Move> opponentActions = stateMachine.getLegalMoves(node.state, opponent); //TODO Fix terrible code
+			Move playerAction = stateMachine.getRandomMove(node.state, role);
 			for(int i = 0; i < opponentActions.size(); i++)
 			{
 				List<Move> moves = new ArrayList<Move>();
@@ -168,7 +171,7 @@ public class MSGamer extends StateMachineGamer {
 				{
 					if(j == playerNumber)
 					{
-						moves.add(stateMachine.getRandomMove(node.state, role));
+						moves.add(playerAction);
 					}
 					else
 					{
@@ -178,18 +181,22 @@ public class MSGamer extends StateMachineGamer {
 				moves.add(opponentActions.get(i));
 				MachineState newstate = stateMachine.getNextState(node.state, moves);
 				boolean isMaxNode = false;
-				GameNode newNode = new GameNode(newstate, node, opponentActions.get(i), isMaxNode);
+				GameNode newNode = new GameNode(newstate, node, playerAction, isMaxNode);
 				node.children.add(newNode);
 			}
 		}
 		return true;
 	}
 
-	private void backpropagate(GameNode node, int score)
+	private void backpropagate(GameNode node, List<Integer> scores)
 	{
-		node.playerUtility = (node.playerUtility * node.visits + score) / (node.visits + 1);
+		for(int i = 0; i < players.size(); i++)
+		{
+			double newUtility = (node.utilities.get(i) * node.visits + scores.get(i)) / (node.visits + 1);
+			node.utilities.set(i, newUtility);
+		}
 		node.visits++;
-		if(node.parent != null) backpropagate(node.parent, score);
+		if(node.parent != null) backpropagate(node.parent, scores);
 	}
 
 	@SuppressWarnings("unused")
@@ -206,23 +213,28 @@ public class MSGamer extends StateMachineGamer {
 		return 100 - legalMoves.size();
 	}
 
-	private int monteCarlo(Role role, MachineState state, int count) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException
-	{
-		int total = 0;
-		for(int i = 0; i < count; i++)
-		{
-			total = total + depthCharge(role, state);
-		}
-		return (total / count );
-	}
+//	private int monteCarlo(Role role, MachineState state, int count) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException
+//	{
+//		int total = 0;
+//		for(int i = 0; i < count; i++)
+//		{
+//			total = total + depthCharge(role, state);
+//		}
+//		return (total / count );
+//	}
 
-	private int depthCharge(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
+	private List<Integer> depthCharge(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		int depth = 0;
 		while (!stateMachine.isTerminal(state) && depth < depthLimit) {
             state = stateMachine.getNextStateDestructively(state, stateMachine.getRandomJointMove(state));
 		}
 		if(depth == depthLimit) System.out.println("Depth limit reached");
-		return stateMachine.getGoal(state, role);
+		List<Integer> scores = new ArrayList<Integer>();
+		for(int i = 0; i < players.size(); i++)
+		{
+			scores.add(stateMachine.getGoal(state, players.get(i)));
+		}
+		return scores;
 	}
 
 	@SuppressWarnings("unused")
@@ -319,8 +331,8 @@ public class MSGamer extends StateMachineGamer {
 			if(nodeCount % 1000 == 0) System.out.println("Nodecount: " + nodeCount + " Free memory: " + Runtime.getRuntime().freeMemory());
 			GameNode node = select(gameTree);
 			boolean nonTerminal = expand(node);
-			int score = depthCharge(role, node.state);
-			backpropagate(node, score);
+			List<Integer> scores = depthCharge(role, node.state);
+			backpropagate(node, scores);
 			nodeCount++;
 			if(timedOut()) break;
 		}
@@ -329,7 +341,7 @@ public class MSGamer extends StateMachineGamer {
 		Move bestMove = stateMachine.getRandomMove(currentState, role);
 		for(int i = 0; i < gameTree.children.size(); i++)
 		{
-			double score = gameTree.children.get(i).playerUtility;
+			double score = gameTree.children.get(i).utilities.get(playerNumber);
 			if(score > bestScore)
 			{
 				bestScore = score;
