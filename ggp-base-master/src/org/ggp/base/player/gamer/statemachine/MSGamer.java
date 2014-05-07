@@ -48,7 +48,10 @@ public class MSGamer extends StateMachineGamer {
 		role = getRole();
 		playerNumber = findPlayerNum();
 		if(playerNumber < 0) System.out.println("We've got a problem: role does not exist.");
-		gameTree = new GameNode(stateMachine.getInitialState(), null, null);
+		MachineState initialState = stateMachine.getInitialState();
+		boolean isMaxNode = false;
+		if(stateMachine.getLegalMoves(initialState, role).size() > 1) isMaxNode = true;
+		gameTree = new GameNode(initialState, null, null, isMaxNode);
 	}
 
 	private int findPlayerNum()
@@ -102,27 +105,89 @@ public class MSGamer extends StateMachineGamer {
 	}
 
 	private double selectfn(GameNode node) {
-		return (node.utility / node.visits) + explorationConstant * Math.sqrt(2 * Math.log(node.parent.visits) / node.visits);
+		return node.playerUtility + explorationConstant * Math.sqrt(2 * Math.log(node.parent.visits) / node.visits);
 	}
 
 	private boolean expand(GameNode node) throws MoveDefinitionException, TransitionDefinitionException
 	{
 		if(stateMachine.isTerminal(node.state)) return false;
-		List<Move> actions = stateMachine.getLegalMoves(node.state, role);
-		for(int i = 0; i < actions.size(); i++)
+		if(players.size() > 1) return expandTwoPlayerGame(node);
+		else return expandOnePlayerGame(node);
+	}
+
+	private boolean expandOnePlayerGame(GameNode node) throws TransitionDefinitionException, MoveDefinitionException {
+		List<Move> playerActions = stateMachine.getLegalMoves(node.state, role);
+		if(playerActions.size() > 1)
 		{
-			List<Move> moves = new ArrayList<Move>();
-			moves.add(actions.get(i));
-			MachineState newstate = stateMachine.getNextState(node.state, moves);
-			GameNode newNode = new GameNode(newstate, node, actions.get(i));
-			node.children.add(newNode);
+			for(int i = 0; i < playerActions.size(); i++)
+			{
+				List<Move> moves = new ArrayList<Move>();
+				moves.add(playerActions.get(i));
+				MachineState newstate = stateMachine.getNextState(node.state, moves);
+				boolean isMaxNode = true;
+				GameNode newNode = new GameNode(newstate, node, playerActions.get(i), isMaxNode);
+				node.children.add(newNode);
+			}
+		}
+		return true;
+	}
+
+	private boolean expandTwoPlayerGame(GameNode node)
+			throws MoveDefinitionException, TransitionDefinitionException {
+		Role opponent = players.get(playerNumber ^ 1);
+		List<Move> playerActions = stateMachine.getLegalMoves(node.state, role);
+		if(playerActions.size() > 1)
+		{
+			for(int i = 0; i < playerActions.size(); i++)
+			{
+				List<Move> moves = new ArrayList<Move>();
+				for(int j = 0; j < players.size(); j++)
+				{
+					if(j == playerNumber)
+					{
+						moves.add(playerActions.get(i));
+					}
+					else
+					{
+						moves.add(stateMachine.getRandomMove(node.state, opponent));
+					}
+				}
+				MachineState newstate = stateMachine.getNextState(node.state, moves);
+				boolean isMaxNode = true;
+				GameNode newNode = new GameNode(newstate, node, playerActions.get(i), isMaxNode);
+				node.children.add(newNode);
+			}
+		}
+		else
+		{
+			List<Move> opponentActions = stateMachine.getLegalMoves(node.state, opponent); //TODO Fix terrible code
+			for(int i = 0; i < opponentActions.size(); i++)
+			{
+				List<Move> moves = new ArrayList<Move>();
+				for(int j = 0; j < players.size(); j++)
+				{
+					if(j == playerNumber)
+					{
+						moves.add(stateMachine.getRandomMove(node.state, role));
+					}
+					else
+					{
+						moves.add(opponentActions.get(i));
+					}
+				}
+				moves.add(opponentActions.get(i));
+				MachineState newstate = stateMachine.getNextState(node.state, moves);
+				boolean isMaxNode = false;
+				GameNode newNode = new GameNode(newstate, node, opponentActions.get(i), isMaxNode);
+				node.children.add(newNode);
+			}
 		}
 		return true;
 	}
 
 	private void backpropagate(GameNode node, int score)
 	{
-		node.utility = (node.utility * node.visits + score) / (node.visits + 1);
+		node.playerUtility = (node.playerUtility * node.visits + score) / (node.visits + 1);
 		node.visits++;
 		if(node.parent != null) backpropagate(node.parent, score);
 	}
@@ -245,7 +310,9 @@ public class MSGamer extends StateMachineGamer {
 	{
 		//TODO maintain old game tree
 		//TODO Add threading
-		gameTree = new GameNode(currentState, null, null);
+		boolean isMaxNode = false;
+		if(stateMachine.getLegalMoves(currentState, role).size() > 1) isMaxNode = true;
+		gameTree = new GameNode(currentState, null, null, isMaxNode);
 		int nodeCount = 0;
 		while(true)
 		{
@@ -262,7 +329,7 @@ public class MSGamer extends StateMachineGamer {
 		Move bestMove = stateMachine.getRandomMove(currentState, role);
 		for(int i = 0; i < gameTree.children.size(); i++)
 		{
-			double score = gameTree.children.get(i).utility;
+			double score = gameTree.children.get(i).playerUtility;
 			if(score > bestScore)
 			{
 				bestScore = score;
