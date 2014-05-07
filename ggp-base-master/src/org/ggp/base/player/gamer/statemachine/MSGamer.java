@@ -223,7 +223,7 @@ public class MSGamer extends StateMachineGamer {
 //		return (total / count );
 //	}
 
-	private List<Integer> depthCharge(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
+	private List<Integer> depthCharge(MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		int depth = 0;
 		while (!stateMachine.isTerminal(state) && depth < depthLimit) {
             state = stateMachine.getNextStateDestructively(state, stateMachine.getRandomJointMove(state));
@@ -331,7 +331,8 @@ public class MSGamer extends StateMachineGamer {
 			if(nodeCount % 1000 == 0) System.out.println("Nodecount: " + nodeCount + " Free memory: " + Runtime.getRuntime().freeMemory());
 			GameNode node = select(gameTree);
 			boolean nonTerminal = expand(node);
-			List<Integer> scores = depthCharge(role, node.state);
+			//List<Integer> scores = minimaxDepthCharge(node);
+			List<Integer> scores = depthCharge(node.state);
 			backpropagate(node, scores);
 			nodeCount++;
 			if(timedOut()) break;
@@ -349,6 +350,32 @@ public class MSGamer extends StateMachineGamer {
 			}
 		}
 		return bestMove;
+	}
+
+	private List<Integer> minimaxDepthCharge(GameNode node) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
+		List<Integer> scores = new ArrayList<Integer>();
+		scores.add(0);
+		scores.add(0);
+		int opponent = playerNumber ^ 1;
+		for(int i = 0; i < node.children.size(); i++)
+		{
+			List<Integer> chargeScores = depthCharge(node.children.get(i).state);
+			if(node.isMaxNode)
+			{
+				if(chargeScores.get(playerNumber) > scores.get(playerNumber))
+				{
+					scores = chargeScores;
+				}
+			}
+			else
+			{
+				if(chargeScores.get(opponent) > scores.get(opponent))
+				{
+					scores = chargeScores;
+				}
+			}
+		}
+		return scores;
 	}
 
 	@Override
