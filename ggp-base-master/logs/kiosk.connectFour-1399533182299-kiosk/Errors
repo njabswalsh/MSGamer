@@ -1,0 +1,220 @@
+LOG 1399533285594 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533285606 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533285617 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533294416 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533294427 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 4 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533294439 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 4 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 4 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533434984 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533434995 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533435007 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533453652 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533453664 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533453675 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533459482 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533459496 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533459509 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533517004 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533517015 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 3 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533517027 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 3 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 3 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533535566 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533535578 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 2 3 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 7 4 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533535589 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 2 3 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 7 4 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 2 3 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 7 4 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533543111 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533543122 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 6 6 red ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 7 6 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533543133 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 6 6 red ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 7 6 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 6 6 red ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 7 6 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533584435 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533584446 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533584458 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533608803 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533608814 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 3 4 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( control black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 3 3 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 1 2 black ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533608826 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 3 4 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( control black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 3 3 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 1 2 black ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 3 4 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( control black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 3 3 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 1 2 black ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533609422 [L9]: <ERR> (in StateMachine) Got goal results of size: 2 when expecting size one.
+LOG 1399533609433 [L9]: <ERR> (in GamePlayer) Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 3 2 black ) ), ( true ( cell 2 6 black ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533609444 [L9]: <ERR> (in GamePlayer) An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 3 2 black ) ), ( true ( cell 2 6 black ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 3 2 black ) ), ( true ( cell 2 6 black ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more

@@ -1,0 +1,328 @@
+LOG 1399533182443 [L0]: [Received at 1399533182443] ( START kiosk.connectFour-1399533182299 black (( role red ) ( role black ) ( <= ( base ( cell ?x ?y ?p ) ) ( x ?x ) ( y ?y ) ( role ?p ) ) ( base ( control red ) ) ( base ( control black ) ) ( <= ( input ?p ( drop ?x ) ) ( role ?p ) ( x ?x ) ) ( <= ( input ?p noop ) ( role ?p ) ) ( init ( control red ) ) ( <= ( legal red noop ) ( true ( control black ) ) ) ( <= ( legal red ( drop ?x ) ) ( true ( control red ) ) ( columnOpen ?x ) ) ( <= ( legal black noop ) ( true ( control red ) ) ) ( <= ( legal black ( drop ?x ) ) ( true ( control black ) ) ( columnOpen ?x ) ) ( <= ( next ( cell ?x 1 ?player ) ) ( does ?player ( drop ?x ) ) ( columnEmpty ?x ) ) ( <= ( next ( cell ?x ?y2 ?player ) ) ( does ?player ( drop ?x ) ) ( cellOpen ?x ?y2 ) ( succ ?y1 ?y2 ) ( not ( cellOpen ?x ?y1 ) ) ) ( <= ( next ( cell ?x ?y ?player ) ) ( true ( cell ?x ?y ?player ) ) ) ( <= ( next ( control red ) ) ( true ( control black ) ) ) ( <= ( next ( control black ) ) ( true ( control red ) ) ) ( <= terminal ( line red ) ) ( <= terminal ( line black ) ) ( <= terminal ( not boardOpen ) ) ( <= ( goal red 100 ) ( line red ) ) ( <= ( goal red 50 ) ( not ( line red ) ) ( not ( line black ) ) ( not boardOpen ) ) ( <= ( goal red 0 ) ( line black ) ) ( <= ( goal red 0 ) ( not ( line red ) ) ( not ( line black ) ) boardOpen ) ( <= ( goal black 100 ) ( line black ) ) ( <= ( goal black 50 ) ( not ( line red ) ) ( not ( line black ) ) ( not boardOpen ) ) ( <= ( goal black 0 ) ( line red ) ) ( <= ( goal black 0 ) ( not ( line red ) ) ( not ( line black ) ) boardOpen ) ( <= ( cellOpen ?x ?y ) ( x ?x ) ( y ?y ) ( not ( true ( cell ?x ?y red ) ) ) ( not ( true ( cell ?x ?y black ) ) ) ) ( <= ( columnOpen ?x ) ( cellOpen ?x 6 ) ) ( <= ( columnEmpty ?x ) ( cellOpen ?x 1 ) ) ( <= boardOpen ( x ?x ) ( columnOpen ?x ) ) ( <= ( line ?player ) ( true ( cell ?x1 ?y ?player ) ) ( succ ?x1 ?x2 ) ( succ ?x2 ?x3 ) ( succ ?x3 ?x4 ) ( true ( cell ?x2 ?y ?player ) ) ( true ( cell ?x3 ?y ?player ) ) ( true ( cell ?x4 ?y ?player ) ) ) ( <= ( line ?player ) ( true ( cell ?x ?y1 ?player ) ) ( succ ?y1 ?y2 ) ( succ ?y2 ?y3 ) ( succ ?y3 ?y4 ) ( true ( cell ?x ?y2 ?player ) ) ( true ( cell ?x ?y3 ?player ) ) ( true ( cell ?x ?y4 ?player ) ) ) ( <= ( line ?player ) ( true ( cell ?x1 ?y1 ?player ) ) ( succ ?x1 ?x2 ) ( succ ?x2 ?x3 ) ( succ ?x3 ?x4 ) ( succ ?y1 ?y2 ) ( succ ?y2 ?y3 ) ( succ ?y3 ?y4 ) ( true ( cell ?x2 ?y2 ?player ) ) ( true ( cell ?x3 ?y3 ?player ) ) ( true ( cell ?x4 ?y4 ?player ) ) ) ( <= ( line ?player ) ( true ( cell ?x1 ?y4 ?player ) ) ( succ ?x1 ?x2 ) ( succ ?x2 ?x3 ) ( succ ?x3 ?x4 ) ( succ ?y3 ?y4 ) ( succ ?y2 ?y3 ) ( succ ?y1 ?y2 ) ( true ( cell ?x2 ?y3 ?player ) ) ( true ( cell ?x3 ?y2 ?player ) ) ( true ( cell ?x4 ?y1 ?player ) ) ) ( succ 1 2 ) ( succ 2 3 ) ( succ 3 4 ) ( succ 4 5 ) ( succ 5 6 ) ( succ 6 7 ) ( succ 7 8 ) ( x 1 ) ( x 2 ) ( x 3 ) ( x 4 ) ( x 5 ) ( x 6 ) ( x 7 ) ( x 8 ) ( y 1 ) ( y 2 ) ( y 3 ) ( y 4 ) ( y 5 ) ( y 6 ) ) 30 10)
+LOG 1399533182498 [L0]: [Sent at 1399533182498] ready
+LOG 1399533182459 [L0]: [Received at 1399533182459] ( START kiosk.connectFour-1399533182299 red (( role red ) ( role black ) ( <= ( base ( cell ?x ?y ?p ) ) ( x ?x ) ( y ?y ) ( role ?p ) ) ( base ( control red ) ) ( base ( control black ) ) ( <= ( input ?p ( drop ?x ) ) ( role ?p ) ( x ?x ) ) ( <= ( input ?p noop ) ( role ?p ) ) ( init ( control red ) ) ( <= ( legal red noop ) ( true ( control black ) ) ) ( <= ( legal red ( drop ?x ) ) ( true ( control red ) ) ( columnOpen ?x ) ) ( <= ( legal black noop ) ( true ( control red ) ) ) ( <= ( legal black ( drop ?x ) ) ( true ( control black ) ) ( columnOpen ?x ) ) ( <= ( next ( cell ?x 1 ?player ) ) ( does ?player ( drop ?x ) ) ( columnEmpty ?x ) ) ( <= ( next ( cell ?x ?y2 ?player ) ) ( does ?player ( drop ?x ) ) ( cellOpen ?x ?y2 ) ( succ ?y1 ?y2 ) ( not ( cellOpen ?x ?y1 ) ) ) ( <= ( next ( cell ?x ?y ?player ) ) ( true ( cell ?x ?y ?player ) ) ) ( <= ( next ( control red ) ) ( true ( control black ) ) ) ( <= ( next ( control black ) ) ( true ( control red ) ) ) ( <= terminal ( line red ) ) ( <= terminal ( line black ) ) ( <= terminal ( not boardOpen ) ) ( <= ( goal red 100 ) ( line red ) ) ( <= ( goal red 50 ) ( not ( line red ) ) ( not ( line black ) ) ( not boardOpen ) ) ( <= ( goal red 0 ) ( line black ) ) ( <= ( goal red 0 ) ( not ( line red ) ) ( not ( line black ) ) boardOpen ) ( <= ( goal black 100 ) ( line black ) ) ( <= ( goal black 50 ) ( not ( line red ) ) ( not ( line black ) ) ( not boardOpen ) ) ( <= ( goal black 0 ) ( line red ) ) ( <= ( goal black 0 ) ( not ( line red ) ) ( not ( line black ) ) boardOpen ) ( <= ( cellOpen ?x ?y ) ( x ?x ) ( y ?y ) ( not ( true ( cell ?x ?y red ) ) ) ( not ( true ( cell ?x ?y black ) ) ) ) ( <= ( columnOpen ?x ) ( cellOpen ?x 6 ) ) ( <= ( columnEmpty ?x ) ( cellOpen ?x 1 ) ) ( <= boardOpen ( x ?x ) ( columnOpen ?x ) ) ( <= ( line ?player ) ( true ( cell ?x1 ?y ?player ) ) ( succ ?x1 ?x2 ) ( succ ?x2 ?x3 ) ( succ ?x3 ?x4 ) ( true ( cell ?x2 ?y ?player ) ) ( true ( cell ?x3 ?y ?player ) ) ( true ( cell ?x4 ?y ?player ) ) ) ( <= ( line ?player ) ( true ( cell ?x ?y1 ?player ) ) ( succ ?y1 ?y2 ) ( succ ?y2 ?y3 ) ( succ ?y3 ?y4 ) ( true ( cell ?x ?y2 ?player ) ) ( true ( cell ?x ?y3 ?player ) ) ( true ( cell ?x ?y4 ?player ) ) ) ( <= ( line ?player ) ( true ( cell ?x1 ?y1 ?player ) ) ( succ ?x1 ?x2 ) ( succ ?x2 ?x3 ) ( succ ?x3 ?x4 ) ( succ ?y1 ?y2 ) ( succ ?y2 ?y3 ) ( succ ?y3 ?y4 ) ( true ( cell ?x2 ?y2 ?player ) ) ( true ( cell ?x3 ?y3 ?player ) ) ( true ( cell ?x4 ?y4 ?player ) ) ) ( <= ( line ?player ) ( true ( cell ?x1 ?y4 ?player ) ) ( succ ?x1 ?x2 ) ( succ ?x2 ?x3 ) ( succ ?x3 ?x4 ) ( succ ?y3 ?y4 ) ( succ ?y2 ?y3 ) ( succ ?y1 ?y2 ) ( true ( cell ?x2 ?y3 ?player ) ) ( true ( cell ?x3 ?y2 ?player ) ) ( true ( cell ?x4 ?y1 ?player ) ) ) ( succ 1 2 ) ( succ 2 3 ) ( succ 3 4 ) ( succ 4 5 ) ( succ 5 6 ) ( succ 6 7 ) ( succ 7 8 ) ( x 1 ) ( x 2 ) ( x 3 ) ( x 4 ) ( x 5 ) ( x 6 ) ( x 7 ) ( x 8 ) ( y 1 ) ( y 2 ) ( y 3 ) ( y 4 ) ( y 5 ) ( y 6 ) ) 30 10)
+LOG 1399533182541 [L0]: [Sent at 1399533182541] ready
+LOG 1399533182562 [L0]: [Received at 1399533182562] ( PLAY kiosk.connectFour-1399533182299 NIL )
+LOG 1399533182562 [L0]: [Received at 1399533182562] ( PLAY kiosk.connectFour-1399533182299 NIL )
+LOG 1399533189228 [L0]: [Sent at 1399533189228] ( drop 4 )
+LOG 1399533190605 [L0]: [Sent at 1399533190605] noop
+LOG 1399533190608 [L0]: [Received at 1399533190608] ( PLAY kiosk.connectFour-1399533182299 (( drop 4 ) noop ) )
+LOG 1399533190613 [L0]: [Received at 1399533190613] ( PLAY kiosk.connectFour-1399533182299 (( drop 4 ) noop ) )
+LOG 1399533190616 [L0]: [Sent at 1399533190616] noop
+LOG 1399533198651 [L0]: [Sent at 1399533198651] ( drop 4 )
+LOG 1399533198653 [L0]: [Received at 1399533198653] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 4 ) ) )
+LOG 1399533198660 [L0]: [Received at 1399533198660] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 4 ) ) )
+LOG 1399533201699 [L0]: [Sent at 1399533201699] ( drop 5 )
+LOG 1399533206712 [L0]: [Sent at 1399533206712] noop
+LOG 1399533206715 [L0]: [Received at 1399533206715] ( PLAY kiosk.connectFour-1399533182299 (( drop 5 ) noop ) )
+LOG 1399533206720 [L0]: [Received at 1399533206720] ( PLAY kiosk.connectFour-1399533182299 (( drop 5 ) noop ) )
+LOG 1399533206724 [L0]: [Sent at 1399533206724] noop
+LOG 1399533214770 [L0]: [Sent at 1399533214770] ( drop 3 )
+LOG 1399533214774 [L0]: [Received at 1399533214774] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 3 ) ) )
+LOG 1399533214780 [L0]: [Received at 1399533214780] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 3 ) ) )
+LOG 1399533218514 [L0]: [Sent at 1399533218514] ( drop 6 )
+LOG 1399533222814 [L0]: [Sent at 1399533222814] noop
+LOG 1399533222833 [L0]: [Received at 1399533222833] ( PLAY kiosk.connectFour-1399533182299 (( drop 6 ) noop ) )
+LOG 1399533222833 [L0]: [Received at 1399533222833] ( PLAY kiosk.connectFour-1399533182299 (( drop 6 ) noop ) )
+LOG 1399533222857 [L0]: [Sent at 1399533222857] noop
+LOG 1399533230861 [L0]: [Sent at 1399533230861] ( drop 7 )
+LOG 1399533230864 [L0]: [Received at 1399533230864] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 7 ) ) )
+LOG 1399533230870 [L0]: [Received at 1399533230870] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 7 ) ) )
+LOG 1399533236035 [L0]: [Sent at 1399533236035] ( drop 5 )
+LOG 1399533238883 [L0]: [Sent at 1399533238883] noop
+LOG 1399533238886 [L0]: [Received at 1399533238886] ( PLAY kiosk.connectFour-1399533182299 (( drop 5 ) noop ) )
+LOG 1399533238892 [L0]: [Received at 1399533238892] ( PLAY kiosk.connectFour-1399533182299 (( drop 5 ) noop ) )
+LOG 1399533238896 [L0]: [Sent at 1399533238896] noop
+LOG 1399533246903 [L0]: [Sent at 1399533246903] ( drop 5 )
+LOG 1399533246908 [L0]: [Received at 1399533246908] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 5 ) ) )
+LOG 1399533246912 [L0]: [Received at 1399533246912] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 5 ) ) )
+LOG 1399533251432 [L0]: [Sent at 1399533251432] ( drop 4 )
+LOG 1399533254929 [L0]: [Sent at 1399533254929] noop
+LOG 1399533254939 [L0]: [Received at 1399533254939] ( PLAY kiosk.connectFour-1399533182299 (( drop 4 ) noop ) )
+LOG 1399533254941 [L0]: [Received at 1399533254941] ( PLAY kiosk.connectFour-1399533182299 (( drop 4 ) noop ) )
+LOG 1399533254958 [L0]: [Sent at 1399533254958] noop
+LOG 1399533262953 [L0]: [Sent at 1399533262953] ( drop 4 )
+LOG 1399533262956 [L0]: [Received at 1399533262956] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 4 ) ) )
+LOG 1399533262965 [L0]: [Received at 1399533262965] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 4 ) ) )
+LOG 1399533266230 [L0]: [Sent at 1399533266230] ( drop 6 )
+LOG 1399533271032 [L0]: [Sent at 1399533271032] noop
+LOG 1399533271036 [L0]: [Received at 1399533271036] ( PLAY kiosk.connectFour-1399533182299 (( drop 6 ) noop ) )
+LOG 1399533271043 [L0]: [Received at 1399533271043] ( PLAY kiosk.connectFour-1399533182299 (( drop 6 ) noop ) )
+LOG 1399533271075 [L0]: [Sent at 1399533271075] noop
+LOG 1399533279075 [L0]: [Sent at 1399533279075] ( drop 5 )
+LOG 1399533279079 [L0]: [Received at 1399533279079] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 5 ) ) )
+LOG 1399533279084 [L0]: [Received at 1399533279084] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 5 ) ) )
+LOG 1399533283589 [L0]: [Sent at 1399533283589] ( drop 7 )
+LOG 1399533285597 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533285608 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533285619 [L0]: [Sent at 1399533285619] nil
+LOG 1399533285622 [L0]: [Received at 1399533285622] ( PLAY kiosk.connectFour-1399533182299 (( drop 7 ) noop ) )
+LOG 1399533285628 [L0]: [Received at 1399533285628] ( PLAY kiosk.connectFour-1399533182299 (( drop 7 ) noop ) )
+LOG 1399533285634 [L0]: [Sent at 1399533285634] noop
+LOG 1399533293641 [L0]: [Sent at 1399533293641] ( drop 6 )
+LOG 1399533293644 [L0]: [Received at 1399533293644] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 6 ) ) )
+LOG 1399533293652 [L0]: [Received at 1399533293652] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 6 ) ) )
+LOG 1399533294418 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 4 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533294429 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 4 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 4 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533294441 [L0]: [Sent at 1399533294441] nil
+LOG 1399533426588 [L0]: [Sent at 1399533426588] ( drop 6 )
+LOG 1399533426619 [L0]: [Received at 1399533426619] ( PLAY kiosk.connectFour-1399533182299 (( drop 6 ) noop ) )
+LOG 1399533426619 [L0]: [Received at 1399533426619] ( PLAY kiosk.connectFour-1399533182299 (( drop 6 ) noop ) )
+LOG 1399533426640 [L0]: [Sent at 1399533426640] noop
+LOG 1399533434673 [L0]: [Sent at 1399533434673] ( drop 5 )
+LOG 1399533434678 [L0]: [Received at 1399533434678] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 5 ) ) )
+LOG 1399533434684 [L0]: [Received at 1399533434684] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 5 ) ) )
+LOG 1399533434986 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533434998 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 5 6 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 1 black ) ), ( true ( control black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533435009 [L0]: [Sent at 1399533435009] nil
+LOG 1399533438188 [L0]: [Sent at 1399533438188] ( drop 5 )
+LOG 1399533438193 [L0]: [Received at 1399533438193] ( PLAY kiosk.connectFour-1399533182299 (( drop 5 ) noop ) )
+LOG 1399533438199 [L0]: [Received at 1399533438199] ( PLAY kiosk.connectFour-1399533182299 (( drop 5 ) noop ) )
+LOG 1399533438213 [L0]: [Sent at 1399533438213] noop
+LOG 1399533446237 [L0]: [Sent at 1399533446237] ( drop 7 )
+LOG 1399533446242 [L0]: [Received at 1399533446242] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 7 ) ) )
+LOG 1399533446247 [L0]: [Received at 1399533446247] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 7 ) ) )
+LOG 1399533453654 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533453666 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533453678 [L0]: [Sent at 1399533453678] nil
+LOG 1399533456044 [L0]: [Sent at 1399533456044] ( drop 1 )
+LOG 1399533456075 [L0]: [Received at 1399533456075] ( PLAY kiosk.connectFour-1399533182299 (( drop 1 ) noop ) )
+LOG 1399533456079 [L0]: [Received at 1399533456079] ( PLAY kiosk.connectFour-1399533182299 (( drop 1 ) noop ) )
+LOG 1399533456101 [L0]: [Sent at 1399533456101] noop
+LOG 1399533459485 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533459498 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 5 6 red ) ), ( true ( control red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533459511 [L0]: [Sent at 1399533459511] nil
+LOG 1399533459516 [L0]: [Received at 1399533459516] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 6 ) ) )
+LOG 1399533459523 [L0]: [Received at 1399533459523] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 6 ) ) )
+LOG 1399533467536 [L0]: [Sent at 1399533467536] noop
+LOG 1399533504691 [L0]: [Sent at 1399533504691] ( drop 2 )
+LOG 1399533504710 [L0]: [Received at 1399533504710] ( PLAY kiosk.connectFour-1399533182299 (( drop 2 ) noop ) )
+LOG 1399533504715 [L0]: [Received at 1399533504715] ( PLAY kiosk.connectFour-1399533182299 (( drop 2 ) noop ) )
+LOG 1399533504731 [L0]: [Sent at 1399533504731] noop
+LOG 1399533512790 [L0]: [Sent at 1399533512790] ( drop 4 )
+LOG 1399533512796 [L0]: [Received at 1399533512796] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 4 ) ) )
+LOG 1399533512800 [L0]: [Received at 1399533512800] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 4 ) ) )
+LOG 1399533517006 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 3 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533517018 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 3 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 3 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 8 1 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533517029 [L0]: [Sent at 1399533517029] nil
+LOG 1399533532087 [L0]: [Sent at 1399533532087] ( drop 2 )
+LOG 1399533532116 [L0]: [Received at 1399533532116] ( PLAY kiosk.connectFour-1399533182299 (( drop 2 ) noop ) )
+LOG 1399533532130 [L0]: [Received at 1399533532130] ( PLAY kiosk.connectFour-1399533182299 (( drop 2 ) noop ) )
+LOG 1399533532146 [L0]: [Sent at 1399533532146] noop
+LOG 1399533535568 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 2 3 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 7 4 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533535580 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 2 3 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 7 4 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 3 1 black ) ), ( true ( cell 6 3 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 2 3 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 7 4 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( control red ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533535591 [L0]: [Sent at 1399533535591] nil
+LOG 1399533535599 [L0]: [Received at 1399533535599] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 2 ) ) )
+LOG 1399533535601 [L0]: [Received at 1399533535601] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 2 ) ) )
+LOG 1399533543113 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 6 6 red ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 7 6 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533543124 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 6 6 red ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 7 6 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 6 6 red ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 7 6 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533543135 [L0]: [Sent at 1399533543135] nil
+LOG 1399533571417 [L0]: [Sent at 1399533571417] ( drop 2 )
+LOG 1399533571455 [L0]: [Received at 1399533571455] ( PLAY kiosk.connectFour-1399533182299 (( drop 2 ) noop ) )
+LOG 1399533571454 [L0]: [Received at 1399533571454] ( PLAY kiosk.connectFour-1399533182299 (( drop 2 ) noop ) )
+LOG 1399533571509 [L0]: [Sent at 1399533571509] noop
+LOG 1399533579495 [L0]: [Sent at 1399533579495] ( drop 6 )
+LOG 1399533579500 [L0]: [Received at 1399533579500] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 6 ) ) )
+LOG 1399533579505 [L0]: [Received at 1399533579505] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 6 ) ) )
+LOG 1399533584437 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533584449 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 7 4 black ) ), ( true ( control black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 4 6 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 7 5 black ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533584462 [L0]: [Sent at 1399533584462] nil
+LOG 1399533606462 [L0]: [Sent at 1399533606462] ( drop 2 )
+LOG 1399533606474 [L0]: [Received at 1399533606474] ( PLAY kiosk.connectFour-1399533182299 (( drop 2 ) noop ) )
+LOG 1399533606484 [L0]: [Received at 1399533606484] ( PLAY kiosk.connectFour-1399533182299 (( drop 2 ) noop ) )
+LOG 1399533606503 [L0]: [Sent at 1399533606503] noop
+LOG 1399533608805 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 3 4 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( control black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 3 3 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 1 2 black ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533608817 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 3 4 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( control black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 3 3 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 1 2 black ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 3 4 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( control black ) ), ( true ( cell 3 2 red ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 3 3 black ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 1 2 black ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 4 1 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533608828 [L0]: [Sent at 1399533608828] nil
+LOG 1399533608834 [L0]: [Received at 1399533608834] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 2 ) ) )
+LOG 1399533608839 [L0]: [Received at 1399533608839] ( PLAY kiosk.connectFour-1399533182299 (noop ( drop 2 ) ) )
+LOG 1399533609424 [L9]: <ERR> Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 3 2 black ) ), ( true ( cell 2 6 black ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+LOG 1399533609435 [L9]: <ERR> An unhandled exception ocurred during move selection: org.ggp.base.player.gamer.exception.MoveSelectionException: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 3 2 black ) ), ( true ( cell 2 6 black ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:215)
+	at org.ggp.base.player.request.grammar.PlayRequest.process(PlayRequest.java:49)
+	at org.ggp.base.player.GamePlayer.run(GamePlayer.java:90)
+Caused by: Goal is poorly defined for red in [( true ( cell 6 3 black ) ), ( true ( cell 3 1 black ) ), ( true ( cell 5 5 black ) ), ( true ( cell 5 2 red ) ), ( true ( cell 8 2 red ) ), ( true ( cell 5 1 red ) ), ( true ( cell 6 6 black ) ), ( true ( cell 6 2 red ) ), ( true ( cell 8 3 black ) ), ( true ( cell 4 2 black ) ), ( true ( cell 4 5 black ) ), ( true ( cell 4 3 red ) ), ( true ( cell 2 4 red ) ), ( true ( cell 4 4 black ) ), ( true ( cell 1 1 red ) ), ( true ( cell 3 2 black ) ), ( true ( cell 2 6 black ) ), ( true ( cell 2 2 red ) ), ( true ( cell 2 1 red ) ), ( true ( cell 8 1 red ) ), ( true ( cell 7 2 red ) ), ( true ( cell 5 4 black ) ), ( true ( cell 6 4 red ) ), ( true ( control red ) ), ( true ( cell 2 3 black ) ), ( true ( cell 5 6 red ) ), ( true ( cell 7 1 black ) ), ( true ( cell 6 1 red ) ), ( true ( cell 2 5 red ) ), ( true ( cell 5 3 black ) ), ( true ( cell 4 1 red ) ), ( true ( cell 7 3 black ) ), ( true ( cell 6 5 black ) )]
+	at org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine.getGoal(ProverStateMachine.java:61)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.depthCharge(MSGamer.java:249)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.getBestMove(MSGamer.java:353)
+	at org.ggp.base.player.gamer.statemachine.MSGamer.stateMachineSelectMove(MSGamer.java:406)
+	at org.ggp.base.player.gamer.statemachine.StateMachineGamer.selectMove(StateMachineGamer.java:210)
+	... 2 more
+LOG 1399533609446 [L0]: [Sent at 1399533609446] nil

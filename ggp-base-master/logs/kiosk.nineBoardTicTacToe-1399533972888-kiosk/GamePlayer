@@ -1,0 +1,164 @@
+LOG 1399533972935 [L0]: [Received at 1399533972935] ( START kiosk.nineBoardTicTacToe-1399533972888 oPlayer (( role xPlayer ) ( role oPlayer ) ( init ( control xPlayer ) ) ( <= ( base ( mark ?i ?j ?k ?l x ) ) ( index ?i ) ( index ?j ) ( index ?k ) ( index ?l ) ) ( <= ( base ( mark ?i ?j ?k ?l o ) ) ( index ?i ) ( index ?j ) ( index ?k ) ( index ?l ) ) ( <= ( base ( currentBoard ?i ?j ) ) ( index ?i ) ( index ?j ) ) ( <= ( base ( control ?r ) ) ( role ?r ) ) ( <= ( input ?r ( play ?i ?j ?k ?l x ) ) ( role ?r ) ( index ?i ) ( index ?j ) ( index ?k ) ( index ?l ) ) ( <= ( input ?r ( play ?i ?j ?k ?l o ) ) ( role ?r ) ( index ?i ) ( index ?j ) ( index ?k ) ( index ?l ) ) ( <= ( input ?r noop ) ( role ?r ) ) ( <= ( legal xPlayer noop ) ( true ( control oPlayer ) ) ) ( <= ( legal xPlayer ( play ?i ?j ?k ?l x ) ) ( true ( control xPlayer ) ) firstMove ( emptyCell ?i ?j ?k ?l ) ) ( <= ( legal xPlayer ( play ?i ?j ?k ?l x ) ) ( true ( control xPlayer ) ) ( true ( currentBoard ?i ?j ) ) ( emptyCell ?i ?j ?k ?l ) ) ( <= ( legal xPlayer ( play ?i ?j ?k ?l x ) ) ( true ( control xPlayer ) ) currentBoardClosed ( emptyCell ?i ?j ?k ?l ) ) ( <= ( legal oPlayer noop ) ( true ( control xPlayer ) ) ) ( <= ( legal oPlayer ( play ?i ?j ?k ?l o ) ) ( true ( control oPlayer ) ) firstMove ( emptyCell ?i ?j ?k ?l ) ) ( <= ( legal oPlayer ( play ?i ?j ?k ?l o ) ) ( true ( control oPlayer ) ) ( true ( currentBoard ?i ?j ) ) ( emptyCell ?i ?j ?k ?l ) ) ( <= ( legal oPlayer ( play ?i ?j ?k ?l o ) ) ( true ( control oPlayer ) ) currentBoardClosed ( emptyCell ?i ?j ?k ?l ) ) ( <= ( next ( mark ?i ?j ?k ?l ?mark ) ) ( role ?player ) ( does ?player ( play ?i ?j ?k ?l ?mark ) ) ) ( <= ( next ( mark ?i ?j ?k ?l ?mark ) ) ( true ( mark ?i ?j ?k ?l ?mark ) ) ) ( <= ( next ( control xPlayer ) ) ( true ( control oPlayer ) ) ) ( <= ( next ( control oPlayer ) ) ( true ( control xPlayer ) ) ) ( <= ( next ( currentBoard ?k ?l ) ) ( role ?player ) ( does ?player ( play ?i ?j ?k ?l ?mark ) ) ) ( <= terminal ( line x ) ) ( <= terminal ( line o ) ) ( <= terminal ( not open ) ) ( <= ( goal xPlayer 0 ) ( not ( line x ) ) ( not ( line o ) ) open ) ( <= ( goal xPlayer 100 ) ( line x ) ) ( <= ( goal xPlayer 50 ) ( not ( line x ) ) ( not ( line o ) ) ( not open ) ) ( <= ( goal xPlayer 0 ) ( line o ) ) ( <= ( goal oPlayer 0 ) ( not ( line x ) ) ( not ( line o ) ) open ) ( <= ( goal oPlayer 100 ) ( line o ) ) ( <= ( goal oPlayer 50 ) ( not ( line x ) ) ( not ( line o ) ) ( not open ) ) ( <= ( goal oPlayer 0 ) ( line x ) ) ( <= ( row ?i ?j ?k ?mark ) ( true ( mark ?i ?j ?k 1 ?mark ) ) ( true ( mark ?i ?j ?k 2 ?mark ) ) ( true ( mark ?i ?j ?k 3 ?mark ) ) ) ( <= ( col ?i ?j ?k ?mark ) ( true ( mark ?i ?j 1 ?k ?mark ) ) ( true ( mark ?i ?j 2 ?k ?mark ) ) ( true ( mark ?i ?j 3 ?k ?mark ) ) ) ( <= ( diag ?i ?j ?mark ) ( true ( mark ?i ?j 1 1 ?mark ) ) ( true ( mark ?i ?j 2 2 ?mark ) ) ( true ( mark ?i ?j 3 3 ?mark ) ) ) ( <= ( diag ?i ?j ?mark ) ( true ( mark ?i ?j 1 3 ?mark ) ) ( true ( mark ?i ?j 2 2 ?mark ) ) ( true ( mark ?i ?j 3 1 ?mark ) ) ) ( <= ( line ?mark ) ( index ?i ) ( index ?j ) ( index ?k ) ( row ?i ?j ?k ?mark ) ) ( <= ( line ?mark ) ( index ?i ) ( index ?j ) ( index ?k ) ( col ?i ?j ?k ?mark ) ) ( <= ( line ?mark ) ( index ?i ) ( index ?j ) ( diag ?i ?j ?mark ) ) ( <= ( emptyCell ?i ?j ?k ?l ) ( index ?i ) ( index ?j ) ( index ?k ) ( index ?l ) ( not ( true ( mark ?i ?j ?k ?l x ) ) ) ( not ( true ( mark ?i ?j ?k ?l o ) ) ) ) ( <= open ( emptyCell ?i ?j ?k ?l ) ) ( <= currentBoardClosed ( true ( currentBoard ?i ?j ) ) ( not ( emptyCell ?i ?j 1 1 ) ) ( not ( emptyCell ?i ?j 1 2 ) ) ( not ( emptyCell ?i ?j 1 3 ) ) ( not ( emptyCell ?i ?j 2 1 ) ) ( not ( emptyCell ?i ?j 2 2 ) ) ( not ( emptyCell ?i ?j 2 3 ) ) ( not ( emptyCell ?i ?j 3 1 ) ) ( not ( emptyCell ?i ?j 3 2 ) ) ( not ( emptyCell ?i ?j 3 3 ) ) ) ( <= firstMove ( not ( true ( currentBoard 1 1 ) ) ) ( not ( true ( currentBoard 1 2 ) ) ) ( not ( true ( currentBoard 1 3 ) ) ) ( not ( true ( currentBoard 2 1 ) ) ) ( not ( true ( currentBoard 2 2 ) ) ) ( not ( true ( currentBoard 2 3 ) ) ) ( not ( true ( currentBoard 3 1 ) ) ) ( not ( true ( currentBoard 3 2 ) ) ) ( not ( true ( currentBoard 3 3 ) ) ) ) ( index 1 ) ( index 2 ) ( index 3 ) ) 30 10)
+LOG 1399533972935 [L0]: [Received at 1399533972935] ( START kiosk.nineBoardTicTacToe-1399533972888 xPlayer (( role xPlayer ) ( role oPlayer ) ( init ( control xPlayer ) ) ( <= ( base ( mark ?i ?j ?k ?l x ) ) ( index ?i ) ( index ?j ) ( index ?k ) ( index ?l ) ) ( <= ( base ( mark ?i ?j ?k ?l o ) ) ( index ?i ) ( index ?j ) ( index ?k ) ( index ?l ) ) ( <= ( base ( currentBoard ?i ?j ) ) ( index ?i ) ( index ?j ) ) ( <= ( base ( control ?r ) ) ( role ?r ) ) ( <= ( input ?r ( play ?i ?j ?k ?l x ) ) ( role ?r ) ( index ?i ) ( index ?j ) ( index ?k ) ( index ?l ) ) ( <= ( input ?r ( play ?i ?j ?k ?l o ) ) ( role ?r ) ( index ?i ) ( index ?j ) ( index ?k ) ( index ?l ) ) ( <= ( input ?r noop ) ( role ?r ) ) ( <= ( legal xPlayer noop ) ( true ( control oPlayer ) ) ) ( <= ( legal xPlayer ( play ?i ?j ?k ?l x ) ) ( true ( control xPlayer ) ) firstMove ( emptyCell ?i ?j ?k ?l ) ) ( <= ( legal xPlayer ( play ?i ?j ?k ?l x ) ) ( true ( control xPlayer ) ) ( true ( currentBoard ?i ?j ) ) ( emptyCell ?i ?j ?k ?l ) ) ( <= ( legal xPlayer ( play ?i ?j ?k ?l x ) ) ( true ( control xPlayer ) ) currentBoardClosed ( emptyCell ?i ?j ?k ?l ) ) ( <= ( legal oPlayer noop ) ( true ( control xPlayer ) ) ) ( <= ( legal oPlayer ( play ?i ?j ?k ?l o ) ) ( true ( control oPlayer ) ) firstMove ( emptyCell ?i ?j ?k ?l ) ) ( <= ( legal oPlayer ( play ?i ?j ?k ?l o ) ) ( true ( control oPlayer ) ) ( true ( currentBoard ?i ?j ) ) ( emptyCell ?i ?j ?k ?l ) ) ( <= ( legal oPlayer ( play ?i ?j ?k ?l o ) ) ( true ( control oPlayer ) ) currentBoardClosed ( emptyCell ?i ?j ?k ?l ) ) ( <= ( next ( mark ?i ?j ?k ?l ?mark ) ) ( role ?player ) ( does ?player ( play ?i ?j ?k ?l ?mark ) ) ) ( <= ( next ( mark ?i ?j ?k ?l ?mark ) ) ( true ( mark ?i ?j ?k ?l ?mark ) ) ) ( <= ( next ( control xPlayer ) ) ( true ( control oPlayer ) ) ) ( <= ( next ( control oPlayer ) ) ( true ( control xPlayer ) ) ) ( <= ( next ( currentBoard ?k ?l ) ) ( role ?player ) ( does ?player ( play ?i ?j ?k ?l ?mark ) ) ) ( <= terminal ( line x ) ) ( <= terminal ( line o ) ) ( <= terminal ( not open ) ) ( <= ( goal xPlayer 0 ) ( not ( line x ) ) ( not ( line o ) ) open ) ( <= ( goal xPlayer 100 ) ( line x ) ) ( <= ( goal xPlayer 50 ) ( not ( line x ) ) ( not ( line o ) ) ( not open ) ) ( <= ( goal xPlayer 0 ) ( line o ) ) ( <= ( goal oPlayer 0 ) ( not ( line x ) ) ( not ( line o ) ) open ) ( <= ( goal oPlayer 100 ) ( line o ) ) ( <= ( goal oPlayer 50 ) ( not ( line x ) ) ( not ( line o ) ) ( not open ) ) ( <= ( goal oPlayer 0 ) ( line x ) ) ( <= ( row ?i ?j ?k ?mark ) ( true ( mark ?i ?j ?k 1 ?mark ) ) ( true ( mark ?i ?j ?k 2 ?mark ) ) ( true ( mark ?i ?j ?k 3 ?mark ) ) ) ( <= ( col ?i ?j ?k ?mark ) ( true ( mark ?i ?j 1 ?k ?mark ) ) ( true ( mark ?i ?j 2 ?k ?mark ) ) ( true ( mark ?i ?j 3 ?k ?mark ) ) ) ( <= ( diag ?i ?j ?mark ) ( true ( mark ?i ?j 1 1 ?mark ) ) ( true ( mark ?i ?j 2 2 ?mark ) ) ( true ( mark ?i ?j 3 3 ?mark ) ) ) ( <= ( diag ?i ?j ?mark ) ( true ( mark ?i ?j 1 3 ?mark ) ) ( true ( mark ?i ?j 2 2 ?mark ) ) ( true ( mark ?i ?j 3 1 ?mark ) ) ) ( <= ( line ?mark ) ( index ?i ) ( index ?j ) ( index ?k ) ( row ?i ?j ?k ?mark ) ) ( <= ( line ?mark ) ( index ?i ) ( index ?j ) ( index ?k ) ( col ?i ?j ?k ?mark ) ) ( <= ( line ?mark ) ( index ?i ) ( index ?j ) ( diag ?i ?j ?mark ) ) ( <= ( emptyCell ?i ?j ?k ?l ) ( index ?i ) ( index ?j ) ( index ?k ) ( index ?l ) ( not ( true ( mark ?i ?j ?k ?l x ) ) ) ( not ( true ( mark ?i ?j ?k ?l o ) ) ) ) ( <= open ( emptyCell ?i ?j ?k ?l ) ) ( <= currentBoardClosed ( true ( currentBoard ?i ?j ) ) ( not ( emptyCell ?i ?j 1 1 ) ) ( not ( emptyCell ?i ?j 1 2 ) ) ( not ( emptyCell ?i ?j 1 3 ) ) ( not ( emptyCell ?i ?j 2 1 ) ) ( not ( emptyCell ?i ?j 2 2 ) ) ( not ( emptyCell ?i ?j 2 3 ) ) ( not ( emptyCell ?i ?j 3 1 ) ) ( not ( emptyCell ?i ?j 3 2 ) ) ( not ( emptyCell ?i ?j 3 3 ) ) ) ( <= firstMove ( not ( true ( currentBoard 1 1 ) ) ) ( not ( true ( currentBoard 1 2 ) ) ) ( not ( true ( currentBoard 1 3 ) ) ) ( not ( true ( currentBoard 2 1 ) ) ) ( not ( true ( currentBoard 2 2 ) ) ) ( not ( true ( currentBoard 2 3 ) ) ) ( not ( true ( currentBoard 3 1 ) ) ) ( not ( true ( currentBoard 3 2 ) ) ) ( not ( true ( currentBoard 3 3 ) ) ) ) ( index 1 ) ( index 2 ) ( index 3 ) ) 30 10)
+LOG 1399533972951 [L0]: [Sent at 1399533972951] ready
+LOG 1399533972967 [L0]: [Sent at 1399533972967] ready
+LOG 1399533972975 [L0]: [Received at 1399533972975] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 NIL )
+LOG 1399533972983 [L0]: [Received at 1399533972983] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 NIL )
+LOG 1399533977460 [L0]: [Sent at 1399533977460] ( play 1 1 1 1 x )
+LOG 1399533981156 [L0]: [Sent at 1399533981156] noop
+LOG 1399533981162 [L0]: [Received at 1399533981162] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 1 1 1 x ) noop ) )
+LOG 1399533981165 [L0]: [Received at 1399533981165] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 1 1 1 x ) noop ) )
+LOG 1399533981203 [L0]: [Sent at 1399533981203] noop
+LOG 1399533989249 [L0]: [Sent at 1399533989249] ( play 1 1 2 2 o )
+LOG 1399533989255 [L0]: [Received at 1399533989255] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 1 2 2 o ) ) )
+LOG 1399533989259 [L0]: [Received at 1399533989259] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 1 2 2 o ) ) )
+LOG 1399533995504 [L0]: [Sent at 1399533995504] ( play 2 2 1 3 x )
+LOG 1399533997378 [L0]: [Sent at 1399533997378] noop
+LOG 1399533997383 [L0]: [Received at 1399533997383] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 2 1 3 x ) noop ) )
+LOG 1399533997388 [L0]: [Received at 1399533997388] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 2 1 3 x ) noop ) )
+LOG 1399533997398 [L0]: [Sent at 1399533997398] noop
+LOG 1399534005501 [L0]: [Sent at 1399534005501] ( play 1 3 2 3 o )
+LOG 1399534005505 [L0]: [Received at 1399534005505] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 3 2 3 o ) ) )
+LOG 1399534005512 [L0]: [Received at 1399534005512] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 3 2 3 o ) ) )
+LOG 1399534013530 [L0]: [Sent at 1399534013530] noop
+LOG 1399534014872 [L0]: [Sent at 1399534014872] ( play 2 3 3 1 x )
+LOG 1399534014888 [L0]: [Received at 1399534014888] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 3 3 1 x ) noop ) )
+LOG 1399534014929 [L0]: [Received at 1399534014929] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 3 3 1 x ) noop ) )
+LOG 1399534014941 [L0]: [Sent at 1399534014941] noop
+LOG 1399534022991 [L0]: [Sent at 1399534022991] ( play 3 1 2 2 o )
+LOG 1399534022996 [L0]: [Received at 1399534022996] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 3 1 2 2 o ) ) )
+LOG 1399534023002 [L0]: [Received at 1399534023002] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 3 1 2 2 o ) ) )
+LOG 1399534030466 [L0]: [Sent at 1399534030466] ( play 2 2 2 3 x )
+LOG 1399534031027 [L0]: [Sent at 1399534031027] noop
+LOG 1399534031032 [L0]: [Received at 1399534031032] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 2 2 3 x ) noop ) )
+LOG 1399534031038 [L0]: [Received at 1399534031038] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 2 2 3 x ) noop ) )
+LOG 1399534031080 [L0]: [Sent at 1399534031080] noop
+LOG 1399534039063 [L0]: [Sent at 1399534039063] ( play 2 3 3 3 o )
+LOG 1399534039068 [L0]: [Received at 1399534039068] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 3 3 3 o ) ) )
+LOG 1399534039074 [L0]: [Received at 1399534039074] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 3 3 3 o ) ) )
+LOG 1399534044767 [L0]: [Sent at 1399534044767] ( play 3 3 1 1 x )
+LOG 1399534047142 [L0]: [Sent at 1399534047142] noop
+LOG 1399534047148 [L0]: [Received at 1399534047148] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 3 1 1 x ) noop ) )
+LOG 1399534047156 [L0]: [Received at 1399534047156] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 3 1 1 x ) noop ) )
+LOG 1399534047162 [L0]: [Sent at 1399534047162] noop
+LOG 1399534055310 [L0]: [Sent at 1399534055310] ( play 1 1 1 2 o )
+LOG 1399534055315 [L0]: [Received at 1399534055315] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 1 1 2 o ) ) )
+LOG 1399534055323 [L0]: [Received at 1399534055323] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 1 1 2 o ) ) )
+LOG 1399534063404 [L0]: [Sent at 1399534063404] noop
+LOG 1399534064672 [L0]: [Sent at 1399534064672] ( play 1 2 3 2 x )
+LOG 1399534064719 [L0]: [Received at 1399534064719] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 2 3 2 x ) noop ) )
+LOG 1399534064721 [L0]: [Received at 1399534064721] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 2 3 2 x ) noop ) )
+LOG 1399534064743 [L0]: [Sent at 1399534064743] noop
+LOG 1399534072811 [L0]: [Sent at 1399534072811] ( play 3 2 3 1 o )
+LOG 1399534072816 [L0]: [Received at 1399534072816] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 3 2 3 1 o ) ) )
+LOG 1399534072822 [L0]: [Received at 1399534072822] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 3 2 3 1 o ) ) )
+LOG 1399534080743 [L0]: [Sent at 1399534080743] ( play 3 1 2 1 x )
+LOG 1399534080865 [L0]: [Sent at 1399534080865] noop
+LOG 1399534080871 [L0]: [Received at 1399534080871] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 1 2 1 x ) noop ) )
+LOG 1399534080878 [L0]: [Received at 1399534080878] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 1 2 1 x ) noop ) )
+LOG 1399534080884 [L0]: [Sent at 1399534080884] noop
+LOG 1399534088922 [L0]: [Sent at 1399534088921] ( play 2 1 1 1 o )
+LOG 1399534088927 [L0]: [Received at 1399534088927] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 1 1 1 o ) ) )
+LOG 1399534088933 [L0]: [Received at 1399534088933] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 1 1 1 o ) ) )
+LOG 1399534094524 [L0]: [Sent at 1399534094524] ( play 1 1 3 2 x )
+LOG 1399534096985 [L0]: [Sent at 1399534096985] noop
+LOG 1399534096990 [L0]: [Received at 1399534096990] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 1 3 2 x ) noop ) )
+LOG 1399534096996 [L0]: [Received at 1399534096996] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 1 3 2 x ) noop ) )
+LOG 1399534097003 [L0]: [Sent at 1399534097003] noop
+LOG 1399534105069 [L0]: [Sent at 1399534105069] ( play 3 2 3 3 o )
+LOG 1399534105075 [L0]: [Received at 1399534105075] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 3 2 3 3 o ) ) )
+LOG 1399534105081 [L0]: [Received at 1399534105081] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 3 2 3 3 o ) ) )
+LOG 1399534111708 [L0]: [Sent at 1399534111708] ( play 3 3 1 2 x )
+LOG 1399534113179 [L0]: [Sent at 1399534113179] noop
+LOG 1399534113184 [L0]: [Received at 1399534113184] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 3 1 2 x ) noop ) )
+LOG 1399534113191 [L0]: [Received at 1399534113191] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 3 1 2 x ) noop ) )
+LOG 1399534113198 [L0]: [Sent at 1399534113198] noop
+LOG 1399534121285 [L0]: [Sent at 1399534121285] ( play 1 2 3 1 o )
+LOG 1399534121292 [L0]: [Received at 1399534121292] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 2 3 1 o ) ) )
+LOG 1399534121297 [L0]: [Received at 1399534121297] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 2 3 1 o ) ) )
+LOG 1399534128397 [L0]: [Sent at 1399534128397] ( play 3 1 1 1 x )
+LOG 1399534129369 [L0]: [Sent at 1399534129369] noop
+LOG 1399534129374 [L0]: [Received at 1399534129374] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 1 1 1 x ) noop ) )
+LOG 1399534129381 [L0]: [Received at 1399534129381] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 1 1 1 x ) noop ) )
+LOG 1399534129399 [L0]: [Sent at 1399534129399] noop
+LOG 1399534137434 [L0]: [Sent at 1399534137434] ( play 1 1 2 3 o )
+LOG 1399534137440 [L0]: [Received at 1399534137440] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 1 2 3 o ) ) )
+LOG 1399534137447 [L0]: [Received at 1399534137447] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 1 2 3 o ) ) )
+LOG 1399534145467 [L0]: [Sent at 1399534145467] noop
+LOG 1399534149635 [L0]: [Sent at 1399534149635] ( play 2 3 2 1 x )
+LOG 1399534149676 [L0]: [Received at 1399534149676] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 3 2 1 x ) noop ) )
+LOG 1399534149676 [L0]: [Received at 1399534149676] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 3 2 1 x ) noop ) )
+LOG 1399534149696 [L0]: [Sent at 1399534149696] noop
+LOG 1399534157744 [L0]: [Sent at 1399534157744] ( play 2 1 1 3 o )
+LOG 1399534157751 [L0]: [Received at 1399534157751] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 1 1 3 o ) ) )
+LOG 1399534157756 [L0]: [Received at 1399534157756] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 1 1 3 o ) ) )
+LOG 1399534165788 [L0]: [Sent at 1399534165788] noop
+LOG 1399534180254 [L0]: [Sent at 1399534180254] ( play 1 3 1 2 x )
+LOG 1399534180296 [L0]: [Received at 1399534180296] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 3 1 2 x ) noop ) )
+LOG 1399534180300 [L0]: [Received at 1399534180300] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 3 1 2 x ) noop ) )
+LOG 1399534180323 [L0]: [Sent at 1399534180323] noop
+LOG 1399534188410 [L0]: [Sent at 1399534188410] ( play 1 2 2 1 o )
+LOG 1399534188416 [L0]: [Received at 1399534188416] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 2 2 1 o ) ) )
+LOG 1399534188423 [L0]: [Received at 1399534188423] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 2 2 1 o ) ) )
+LOG 1399534196497 [L0]: [Sent at 1399534196497] noop
+LOG 1399534199013 [L0]: [Sent at 1399534199013] ( play 2 1 2 2 x )
+LOG 1399534199063 [L0]: [Received at 1399534199063] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 1 2 2 x ) noop ) )
+LOG 1399534199064 [L0]: [Received at 1399534199064] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 1 2 2 x ) noop ) )
+LOG 1399534199081 [L0]: [Sent at 1399534199081] noop
+LOG 1399534207097 [L0]: [Sent at 1399534207097] ( play 2 2 2 1 o )
+LOG 1399534207103 [L0]: [Received at 1399534207103] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 2 2 1 o ) ) )
+LOG 1399534207108 [L0]: [Received at 1399534207108] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 2 2 1 o ) ) )
+LOG 1399534215140 [L0]: [Sent at 1399534215140] noop
+LOG 1399534221551 [L0]: [Sent at 1399534221551] ( play 2 1 2 3 x )
+LOG 1399534221574 [L0]: [Received at 1399534221574] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 1 2 3 x ) noop ) )
+LOG 1399534221574 [L0]: [Received at 1399534221574] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 1 2 3 x ) noop ) )
+LOG 1399534221592 [L0]: [Sent at 1399534221592] noop
+LOG 1399534229629 [L0]: [Sent at 1399534229629] ( play 2 3 1 1 o )
+LOG 1399534229636 [L0]: [Received at 1399534229636] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 3 1 1 o ) ) )
+LOG 1399534229641 [L0]: [Received at 1399534229641] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 3 1 1 o ) ) )
+LOG 1399534237657 [L0]: [Sent at 1399534237657] noop
+LOG 1399534240833 [L0]: [Sent at 1399534240833] ( play 1 1 3 1 x )
+LOG 1399534240850 [L0]: [Received at 1399534240850] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 1 3 1 x ) noop ) )
+LOG 1399534240861 [L0]: [Received at 1399534240860] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 1 3 1 x ) noop ) )
+LOG 1399534240877 [L0]: [Sent at 1399534240877] noop
+LOG 1399534248902 [L0]: [Sent at 1399534248902] ( play 3 1 1 2 o )
+LOG 1399534248909 [L0]: [Received at 1399534248909] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 3 1 1 2 o ) ) )
+LOG 1399534248913 [L0]: [Received at 1399534248913] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 3 1 1 2 o ) ) )
+LOG 1399534256942 [L0]: [Sent at 1399534256942] noop
+LOG 1399534262501 [L0]: [Sent at 1399534262501] ( play 1 2 2 2 x )
+LOG 1399534262549 [L0]: [Received at 1399534262549] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 2 2 2 x ) noop ) )
+LOG 1399534262549 [L0]: [Received at 1399534262549] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 1 2 2 2 x ) noop ) )
+LOG 1399534262566 [L0]: [Sent at 1399534262566] noop
+LOG 1399534270591 [L0]: [Sent at 1399534270591] ( play 2 2 3 2 o )
+LOG 1399534270601 [L0]: [Received at 1399534270601] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 2 3 2 o ) ) )
+LOG 1399534270606 [L0]: [Received at 1399534270606] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 2 3 2 o ) ) )
+LOG 1399534278476 [L0]: [Sent at 1399534278476] ( play 3 2 1 3 x )
+LOG 1399534278622 [L0]: [Sent at 1399534278622] noop
+LOG 1399534278630 [L0]: [Received at 1399534278630] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 2 1 3 x ) noop ) )
+LOG 1399534278636 [L0]: [Received at 1399534278636] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 2 1 3 x ) noop ) )
+LOG 1399534278644 [L0]: [Sent at 1399534278644] noop
+LOG 1399534286690 [L0]: [Sent at 1399534286690] ( play 1 3 3 2 o )
+LOG 1399534286696 [L0]: [Received at 1399534286696] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 3 3 2 o ) ) )
+LOG 1399534286703 [L0]: [Received at 1399534286703] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 1 3 3 2 o ) ) )
+LOG 1399534293044 [L0]: [Sent at 1399534293044] ( play 3 2 3 2 x )
+LOG 1399534294747 [L0]: [Sent at 1399534294747] noop
+LOG 1399534294754 [L0]: [Received at 1399534294754] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 2 3 2 x ) noop ) )
+LOG 1399534294758 [L0]: [Received at 1399534294758] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 3 2 3 2 x ) noop ) )
+LOG 1399534294769 [L0]: [Sent at 1399534294769] noop
+LOG 1399534302777 [L0]: [Sent at 1399534302777] ( play 3 2 2 3 o )
+LOG 1399534302784 [L0]: [Received at 1399534302784] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 3 2 2 3 o ) ) )
+LOG 1399534302790 [L0]: [Received at 1399534302790] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 3 2 2 3 o ) ) )
+LOG 1399534310849 [L0]: [Sent at 1399534310849] noop
+LOG 1399534319388 [L0]: [Received at 1399534319388] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 3 2 2 x ) noop ) )
+LOG 1399534319362 [L0]: [Sent at 1399534319362] ( play 2 3 2 2 x )
+LOG 1399534319436 [L0]: [Received at 1399534319436] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (( play 2 3 2 2 x ) noop ) )
+LOG 1399534319453 [L0]: [Sent at 1399534319453] noop
+LOG 1399534327420 [L0]: [Sent at 1399534327420] ( play 2 2 3 1 o )
+LOG 1399534327430 [L0]: [Received at 1399534327430] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 2 3 1 o ) ) )
+LOG 1399534327433 [L0]: [Received at 1399534327433] ( PLAY kiosk.nineBoardTicTacToe-1399533972888 (noop ( play 2 2 3 1 o ) ) )
+LOG 1399534335452 [L0]: [Sent at 1399534335452] noop
+LOG 1399534350975 [L0]: [Sent at 1399534350975] ( play 3 1 3 1 x )
+LOG 1399534351037 [L0]: [Received at 1399534351037] ( STOP kiosk.nineBoardTicTacToe-1399533972888 (( play 3 1 3 1 x ) noop ) )
+LOG 1399534351037 [L0]: [Received at 1399534351037] ( STOP kiosk.nineBoardTicTacToe-1399533972888 (( play 3 1 3 1 x ) noop ) )
+LOG 1399534351060 [L0]: [Sent at 1399534351060] done
+LOG 1399534351061 [L0]: [Sent at 1399534351061] done

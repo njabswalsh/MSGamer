@@ -13,7 +13,7 @@ import org.ggp.base.util.gdl.grammar.GdlTerm;
  * only express the action itself.
  */
 @SuppressWarnings("serial")
-public class Move implements Serializable
+public class Move implements Serializable, Comparable<Move>
 {
     protected final GdlTerm contents;
 
@@ -49,4 +49,9 @@ public class Move implements Serializable
     {
         return contents.toString();
     }
+
+	@Override
+	public int compareTo(Move o) {
+		return hashCode() - o.hashCode();
+	}
 }
