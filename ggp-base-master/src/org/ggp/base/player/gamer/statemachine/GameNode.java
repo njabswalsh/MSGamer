@@ -17,7 +17,7 @@ public class GameNode {
 	int visits;
 	List<GameNode> children;
 	List<Move> jointMove;
-	List< TreeMap<Move, Pair<Double, Integer> > > utilitiesAndMoveCounts;
+	List< TreeMap<Move, Pair<Long, Integer> > > utilitiesAndMoveCounts;
 	boolean UAMCInitialized = false;
 	public GameNode(MachineState state, GameNode parent, List<Move> jointMove)
 	{
@@ -25,7 +25,7 @@ public class GameNode {
 		this.state = state;
 		this.jointMove = jointMove;
 		this.visits = 0;
-		this.utilitiesAndMoveCounts = new ArrayList< TreeMap<Move, Pair<Double, Integer> > >();
+		this.utilitiesAndMoveCounts = new ArrayList< TreeMap<Move, Pair<Long, Integer> > >();
 		this.children = new ArrayList<GameNode>();
 	}
 
@@ -34,10 +34,10 @@ public class GameNode {
 		for(int i = 0; i < players.size(); i++)
 		{
 			List<Move> legals = stateMachine.getLegalMoves(state, players.get(i));
-			TreeMap<Move, Pair<Double, Integer> > map = new TreeMap<Move, Pair<Double, Integer> >();
+			TreeMap<Move, Pair<Long, Integer> > map = new TreeMap<Move, Pair<Long, Integer> >();
 			for(Move move : legals)
 			{
-				Pair<Double, Integer> pair = Pair.of(0.0,0);
+				Pair<Long, Integer> pair = Pair.of((long)0,0);
 				map.put(move, pair);
 			}
 			utilitiesAndMoveCounts.add(map);

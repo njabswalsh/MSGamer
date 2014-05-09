@@ -1,0 +1,4 @@
+LOG 1399625852753 [L9]: <ERR> (in StateMachine) Got goal results of size: 0 when expecting size one.
+LOG 1399625852768 [L9]: <ERR> (in StateMachine) Got goal results of size: 0 when expecting size one.
+LOG 1399625877376 [L9]: <ERR> (in StateMachine) Got goal results of size: 0 when expecting size one.
+LOG 1399625877401 [L9]: <ERR> (in StateMachine) Got goal results of size: 0 when expecting size one.

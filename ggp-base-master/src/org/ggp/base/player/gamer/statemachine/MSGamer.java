@@ -19,13 +19,14 @@ import org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine;
 
 public class MSGamer extends StateMachineGamer {
 
-	private static final long serverTimeBuffer = 2000;
+	private static final long serverTimeBuffer = 1500;
 	private static final boolean debug = false;
 	private static final boolean useDepthLimit = true;
 	private static final int MonteCarloCount = 4;
 	private static final int depthIncrement = 1;
 	private static final double explorationConstant = 40;
 	private static final int nodesPerMetaGameTurn = 0;
+	private static final int numberOfDepthTests = 4;
 	private int depthLimit = 200;
 	private long timeout = 0;
 	private List<Role> players;
@@ -56,11 +57,40 @@ public class MSGamer extends StateMachineGamer {
 		MachineState initialState = stateMachine.getInitialState();
 		gameTree = new GameNode(initialState, null, null);
 		gameTree.initializeUAMC(players, stateMachine);
+		long averageDepthChargeTime = getAverageDepthChargeTime(numberOfDepthTests, initialState);
+		long averageMCTSIteration = getAverageMCTSIteration(numberOfDepthTests);
+		System.out.println("Average Depth Charge: " + averageDepthChargeTime + " Average MCTSIteration: " + averageMCTSIteration);
 		//playGameAgainstSearchlight(40);
 	}
 
-	private void playGameAgainstSearchlight(int CValue) throws MoveDefinitionException, TransitionDefinitionException, GoalDefinitionException {
-		MachineState initialState = stateMachine.getInitialState();
+	private long getAverageMCTSIteration(int n) throws MoveDefinitionException, TransitionDefinitionException, GoalDefinitionException {
+		long sum = 0;
+		for(int i = 0; i < n; i++)
+		{
+			long startTime = System.currentTimeMillis();
+			iterateMCTS();
+			long endTime = System.currentTimeMillis();
+			sum += endTime - startTime;
+		}
+		return sum / n;
+	}
+
+	private long getAverageDepthChargeTime(int n, MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException
+	{
+		long sum = 0;
+		for(int i = 0; i < n; i++)
+		{
+			long startTime = System.currentTimeMillis();
+			depthCharge(state);
+			long endTime = System.currentTimeMillis();
+			sum += endTime - startTime;
+		}
+		return sum / n;
+	}
+
+	private void playGameAgainstSearchlight(int CValue, MachineState initialState) throws MoveDefinitionException, TransitionDefinitionException, GoalDefinitionException
+	{
+
 
 	}
 
@@ -130,16 +160,17 @@ public class MSGamer extends StateMachineGamer {
 	{
 		while(true)
 		{
-			if(node.visits == 0 || stateMachine.isTerminal(node.state))
+			boolean nodeIsTerminal = stateMachine.isTerminal(node.state);
+			if(node.visits == 0 || nodeIsTerminal)
 			{
-				if(!node.isUAMCInitialized()) node.initializeUAMC(players, stateMachine);
+				if(!node.isUAMCInitialized() && !nodeIsTerminal) node.initializeUAMC(players, stateMachine);
 				return node;
 			}
 			for (GameNode child : node.children)
 			{
 				if(child.visits == 0)
 				{
-					if(!child.isUAMCInitialized()) child.initializeUAMC(players, stateMachine);
+					if(!child.isUAMCInitialized() && !stateMachine.isTerminal(child.state)) child.initializeUAMC(players, stateMachine);
 					return child;
 				}
 			}
@@ -172,21 +203,21 @@ public class MSGamer extends StateMachineGamer {
 	}
 
 	private double selectfn(GameNode node, int playerNumber, Move move) {
-		double moveUtility = node.utilitiesAndMoveCounts.get(playerNumber).get(move).left;
 		int moveVisits = node.utilitiesAndMoveCounts.get(playerNumber).get(move).right;
+		double moveUtility = (double)node.utilitiesAndMoveCounts.get(playerNumber).get(move).left / moveVisits;
 		return moveUtility + explorationConstant * Math.sqrt(2 * Math.log(node.visits) / moveVisits);
 	}
 
 	private boolean expand(GameNode node) throws MoveDefinitionException, TransitionDefinitionException
 	{
-		if(stateMachine.isTerminal(node.state)) return false;
+		if(stateMachine.isTerminal(node.state)) return true;
 		for(List<Move> jointMove: stateMachine.getLegalJointMoves(node.state))
 		{
 			MachineState newstate = stateMachine.getNextState(node.state, jointMove);
 			GameNode newNode = new GameNode(newstate, node, jointMove);
 			node.children.add(newNode);
 		}
-		return true;
+		return false;
 	}
 
 	private void backpropagate(GameNode node, List<Integer> scores, List<Move> jointMove) throws MoveDefinitionException
@@ -196,10 +227,9 @@ public class MSGamer extends StateMachineGamer {
 		{
 		for(int player = 0; player < players.size(); player++)
 		{
-			Pair<Double, Integer> utilityAndVisits = node.utilitiesAndMoveCounts.get(player).get(jointMove.get(player));
-			int visits = utilityAndVisits.right;
-			double utility = utilityAndVisits.left;
-			utilityAndVisits.left = (utility * visits + scores.get(player)) / (visits + 1);
+			Pair<Long, Integer> utilityAndVisits = node.utilitiesAndMoveCounts.get(player).get(jointMove.get(player));
+			long utility = utilityAndVisits.left;
+			utilityAndVisits.left = utility + scores.get(player);
 			utilityAndVisits.right++;
 			node.utilitiesAndMoveCounts.get(player).put(jointMove.get(player), utilityAndVisits);
 		}
@@ -238,32 +268,37 @@ public class MSGamer extends StateMachineGamer {
 //	}
 
 	private List<Integer> depthCharge(MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
-		int depth = 0;
-		while (!stateMachine.isTerminal(state) && depth < depthLimit) {
-            state = stateMachine.getNextStateDestructively(state, stateMachine.getRandomJointMove(state));
+		while (!stateMachine.isTerminal(state)) {
+            state = stateMachine.getNextState(state, stateMachine.getRandomJointMove(state));
 		}
-		if(depth == depthLimit) System.out.println("Depth limit reached");
-		List<Integer> scores = new ArrayList<Integer>();
-		for(int i = 0; i < players.size(); i++)
-		{
-			try
-			{
-				scores.add(stateMachine.getGoal(state, players.get(i)));
-			}
-			catch(GoalDefinitionException e)
-			{
-				System.out.println("Undefined goal");
-				scores.add(50);
-			}
-		}
+		List<Integer> scores = getScoresForState(state);
 		return scores;
 	}
+
+	private List<Integer> getScoresForState(MachineState state) {
+	List<Integer> scores = new ArrayList<Integer>();
+	for(int i = 0; i < players.size(); i++)
+	{
+		try
+		{
+			scores.add(stateMachine.getGoal(state, players.get(i)));
+		}
+		catch(GoalDefinitionException e)
+		{
+			System.out.println("Undefined goal");
+			e.printStackTrace();
+			scores.add(50);
+		}
+	}
+	return scores;
+}
 
 	@SuppressWarnings("unused")
 	private int goalProximityEval(Role role, MachineState state) throws GoalDefinitionException
 	{
 		return stateMachine.getGoal(state, role);
 	}
+
 
 	private int evalFunction(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException
 	{
@@ -342,42 +377,64 @@ public class MSGamer extends StateMachineGamer {
 
 	public Move getBestMove(Role role, MachineState currentState) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
-		//TODO maintain old game tree
-		//TODO Add threading
-			Move bestMove = stateMachine.getRandomMove(currentState, role);
-			if(stateMachine.getLegalMoves(currentState, role).size() > 1) {
-			gameTree = new GameNode(currentState, null, null);
-			gameTree.initializeUAMC(players, stateMachine);
-			int nodeCount = 0;
-			while(true)
+		boolean isChildTree = false;
+		for(GameNode child : gameTree.children)
+		{
+			if(child.state.equals(currentState))
 			{
-				if(nodeCount % 100 == 0)
-				{
-					System.out.println("Nodecount: " + nodeCount + " Free memory: " + Runtime.getRuntime().freeMemory());
-				}
-				GameNode node = select(gameTree);
-				boolean nonTerminal = expand(node);
-				List<Move> jointMove = stateMachine.getRandomJointMove(node.state);
-				List<Integer> scores = depthCharge(stateMachine.getNextState(node.state, jointMove));
-				backpropagate(node, scores, jointMove);
-				nodeCount++;
-				if(timedOut()) break;
-			}
-
-			double bestScore = -1;
-
-			TreeMap<Move, Pair<Double, Integer> > movesToUtils = gameTree.utilitiesAndMoveCounts.get(playerNumber);
-			for(Move move : movesToUtils.navigableKeySet())
-			{
-				double newScore = movesToUtils.get(move).left;
-				if(newScore > bestScore)
-				{
-					bestScore = newScore;
-					bestMove = move;
-				}
+				gameTree = child;
+				isChildTree = true;
 			}
 		}
+		if(!isChildTree)
+		{
+			System.out.println("This shouldn't happen");
+			gameTree = new GameNode(currentState, null, null);
+			gameTree.initializeUAMC(players, stateMachine);
+		}
+		Move bestMove = stateMachine.getRandomMove(currentState, role);
+		int nodeCount = 0;
+		while(!timedOut())
+		{
+			iterateMCTS();
+			nodeCount++;
+		}
+		System.out.println("Nodecount: " + nodeCount + " Free memory: " + Runtime.getRuntime().freeMemory());
+		double bestScore = -1;
+		int bestMoveVisits = 0;
+		TreeMap<Move, Pair<Long, Integer> > movesToUtils = gameTree.utilitiesAndMoveCounts.get(playerNumber);
+		for(Move move : movesToUtils.navigableKeySet())
+		{
+			long util = movesToUtils.get(move).left;
+			int visits = movesToUtils.get(move).right;
+			double newScore = (double)util / visits;
+			System.out.println("Move: " + move + " score: " + newScore + " Visits: " + visits + " Util: " + util);
+			if(newScore > bestScore || (newScore == bestScore && visits > bestMoveVisits))
+			{
+				bestScore = newScore;
+				bestMove = move;
+				bestMoveVisits = visits;
+			}
+		}
+		//TODO change gameTree here
 		return bestMove;
+	}
+
+	private void iterateMCTS() throws MoveDefinitionException,
+			TransitionDefinitionException, GoalDefinitionException {
+		GameNode node = select(gameTree);
+		boolean terminal = expand(node);
+		if(!terminal)
+		{
+			List<Move> jointMove = stateMachine.getRandomJointMove(node.state);
+			List<Integer> scores = depthCharge(stateMachine.getNextState(node.state, jointMove));
+			backpropagate(node, scores, jointMove);
+		}
+		else
+		{
+			List<Integer> scores = getScoresForState(node.state);
+			backpropagate(node.parent, scores, node.jointMove);
+		}
 	}
 
 //	private List<Integer> minimaxDepthCharge(GameNode node) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
