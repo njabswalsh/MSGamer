@@ -14,6 +14,10 @@ import org.ggp.base.util.gdl.grammar.GdlRelation;
 import org.ggp.base.util.gdl.grammar.GdlSentence;
 import org.ggp.base.util.propnet.architecture.Component;
 import org.ggp.base.util.propnet.architecture.PropNet;
+import org.ggp.base.util.propnet.architecture.components.And;
+import org.ggp.base.util.propnet.architecture.components.Constant;
+import org.ggp.base.util.propnet.architecture.components.Not;
+import org.ggp.base.util.propnet.architecture.components.Or;
 import org.ggp.base.util.propnet.architecture.components.Proposition;
 import org.ggp.base.util.propnet.factory.PropNetFactory;
 import org.ggp.base.util.statemachine.MachineState;
@@ -53,8 +57,7 @@ public class PropNetStateMachine extends StateMachine {
 	@Override
 	public boolean isTerminal(MachineState state) {
 		setBasesFromState(state);
-		// TODO: Compute whether the MachineState is terminal.
-		return false;
+		return getPropValue(propNet.getTerminalProposition());
 	}
 
 	/**
@@ -78,7 +81,7 @@ public class PropNetStateMachine extends StateMachine {
 	 */
 	@Override
 	public MachineState getInitialState() {
-		System.out.println("getInitialState()");
+		//System.out.println("getInitialState()");
 		propNet.getInitProposition().setValue(true);
 		return getStateFromBase();
 	}
@@ -89,7 +92,7 @@ public class PropNetStateMachine extends StateMachine {
 	@Override
 	public List<Move> getLegalMoves(MachineState state, Role role)
 	{
-		System.out.println("getLegalMoves()");
+		//System.out.println("getLegalMoves(): " + role);
 		setBasesFromState(state);
 		Set<Proposition> legalProps = null;
 		for(Role r : roles)
@@ -100,10 +103,11 @@ public class PropNetStateMachine extends StateMachine {
 				break;
 			}
 		}
+		if(legalProps == null) System.out.println("We've got a serious issue");
 		List<Move> legalMoves = new ArrayList<Move>();
 		for(Proposition p : legalProps)
 		{
-			if(p.getValue())
+			if(getPropValue(p))
 			{
 				legalMoves.add(getMoveFromProposition(p));
 			}
@@ -123,7 +127,7 @@ public class PropNetStateMachine extends StateMachine {
 		Set<GdlSentence> contents = new HashSet<GdlSentence>();
 		for(Proposition p: bases)
 		{
-			if(p.getSingleInput().getSingleInput().getValue())
+			if(getPropValue(p.getSingleInput().getSingleInput()))
 			{
 				contents.add(p.getName());
 			}
@@ -132,7 +136,7 @@ public class PropNetStateMachine extends StateMachine {
 	}
 
 	private void setInputFromMoves(List<Move> moves) {
-		System.out.println("setInputFromMoves()");
+		//System.out.println("setInputFromMoves()");
 		List<GdlSentence> sentences = toDoes(moves);
 		Map<GdlSentence, Proposition> inputMap = propNet.getInputPropositions();
 		for(Proposition p: propNet.getInputPropositions().values())
@@ -141,7 +145,7 @@ public class PropNetStateMachine extends StateMachine {
 		}
 		for(GdlSentence sentence: sentences)
 		{
-			System.out.println("Setting: " + sentence);
+			//System.out.println("Setting: " + sentence);
 			inputMap.get(sentence).setValue(false);
 		}
 	}
@@ -233,7 +237,7 @@ public class PropNetStateMachine extends StateMachine {
     //Not the most efficient implementation
     private void setBasesFromState(MachineState state)
     {
-    	System.out.println("setBasesFromState()");
+    	//System.out.println("setBasesFromState()");
     	Set<GdlSentence> stateContent = state.getContents();
     	Map<GdlSentence, Proposition> propMap = propNet.getBasePropositions();
     	for (Proposition p : propNet.getBasePropositions().values())
@@ -242,7 +246,7 @@ public class PropNetStateMachine extends StateMachine {
 		}
     	for(GdlSentence name : stateContent)
     	{
-    		System.out.println("Setting: " + name.toString());
+    		//System.out.println("Setting: " + name.toString());
     		Proposition p = propMap.get(name);
     		p.setValue(true);
     	}
@@ -267,5 +271,55 @@ public class PropNetStateMachine extends StateMachine {
 
 		}
 		return new MachineState(contents);
+	}
+	/*
+	 * Below this point is an implementation for backwards reasoning
+	 *
+	 */
+	private boolean getPropValue(Component c)
+	{
+		if(c instanceof Constant) return c.getValue();
+		if(c instanceof And) return getAndPropValue(c);
+		if(c instanceof Or) return getOrPropValue(c);
+		if(c instanceof Not) return !getPropValue(c.getSingleInput());
+
+		Collection<Proposition> baseProps = propNet.getBasePropositions().values();
+		if(baseProps.contains(c))
+		{
+			//System.out.println("It worked!!!");
+			return c.getValue();
+		}
+		Collection<Proposition> inputProps = propNet.getInputPropositions().values();
+		if(baseProps.contains(c))
+		{
+			//System.out.println("It worked!!!");
+			return c.getValue();
+		}
+
+		if(c.getInputs().size() == 0)
+		{
+			//System.out.println("It worked...");
+			return c.getValue();
+		}
+		return getPropValue(c.getSingleInput());
+	}
+
+	private boolean getAndPropValue(Component c)
+	{
+		Set<Component> inputs = c.getInputs();
+		for(Component in : inputs)
+		{
+			if(!getPropValue(in)) return false;
+		}
+		return true;
+	}
+	private boolean getOrPropValue(Component c)
+	{
+		Set<Component> inputs = c.getInputs();
+		for(Component in : inputs)
+		{
+			if(getPropValue(in)) return true;
+		}
+		return false;
 	}
 }

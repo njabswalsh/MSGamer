@@ -59,9 +59,9 @@ public class MSGamer extends StateMachineGamer {
 		MachineState initialState = stateMachine.getInitialState();
 		gameTree = new GameNode(initialState, null, null);
 		gameTree.initializeUAMC(players, stateMachine);
-		long averageDepthChargeTime = getAverageDepthChargeTime(numberOfDepthTests, initialState);
-		long averageMCTSIteration = getAverageMCTSIteration(numberOfDepthTests);
-		System.out.println("Average Depth Charge: " + averageDepthChargeTime + " Average MCTSIteration: " + averageMCTSIteration);
+		//long averageDepthChargeTime = getAverageDepthChargeTime(numberOfDepthTests, initialState);
+		//long averageMCTSIteration = getAverageMCTSIteration(numberOfDepthTests);
+		//System.out.println("Average Depth Charge: " + averageDepthChargeTime + " Average MCTSIteration: " + averageMCTSIteration);
 		//playGameAgainstSearchlight(40);
 	}
 
@@ -272,7 +272,6 @@ public class MSGamer extends StateMachineGamer {
 
 	public Move getBestMove(Role role, MachineState currentState) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
-		System.out.println("Current State: " + currentState.toString());
 		boolean isChildTree = false;
 		for(GameNode child : gameTree.children)
 		{
@@ -284,7 +283,7 @@ public class MSGamer extends StateMachineGamer {
 		}
 		if(!isChildTree)
 		{
-			System.out.println("This shouldn't happen");
+			System.out.println("This shouldn't happen too often");
 			gameTree = new GameNode(currentState, null, null);
 			gameTree.initializeUAMC(players, stateMachine);
 		}
