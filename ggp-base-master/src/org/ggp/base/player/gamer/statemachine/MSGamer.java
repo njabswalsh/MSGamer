@@ -15,7 +15,7 @@ import org.ggp.base.util.statemachine.StateMachine;
 import org.ggp.base.util.statemachine.exceptions.GoalDefinitionException;
 import org.ggp.base.util.statemachine.exceptions.MoveDefinitionException;
 import org.ggp.base.util.statemachine.exceptions.TransitionDefinitionException;
-import org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine;
+import org.ggp.base.util.statemachine.implementation.propnet.PropNetStateMachine;
 
 public class MSGamer extends StateMachineGamer {
 
@@ -35,11 +35,13 @@ public class MSGamer extends StateMachineGamer {
 	private Random r = new Random();
 	private GameNode gameTree;
 	StateMachine stateMachine;
+	StateMachine testStateMachine;
 	@Override
 	public StateMachine getInitialStateMachine()
 	{
 		System.out.println("Initialized");
-		return new ProverStateMachine();
+		return new PropNetStateMachine();
+//		return new ProverStateMachine();
 	}
 
 	@Override
@@ -138,7 +140,6 @@ public class MSGamer extends StateMachineGamer {
 		}
 		return selection;
 	}
-
 
 	private int findPlayerNum()
 	{
@@ -243,30 +244,6 @@ public class MSGamer extends StateMachineGamer {
 
 	}
 
-	@SuppressWarnings("unused")
-	private int mobilityEval(Role role, MachineState state) throws MoveDefinitionException
-	{
-		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
-		return legalMoves.size();
-	}
-
-	@SuppressWarnings("unused")
-	private int focusEval(Role role, MachineState state) throws MoveDefinitionException
-	{
-		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
-		return 100 - legalMoves.size();
-	}
-
-//	private int monteCarlo(Role role, MachineState state, int count) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException
-//	{
-//		int total = 0;
-//		for(int i = 0; i < count; i++)
-//		{
-//			total = total + depthCharge(role, state);
-//		}
-//		return (total / count );
-//	}
-
 	private List<Integer> depthCharge(MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		while (!stateMachine.isTerminal(state)) {
             state = stateMachine.getNextState(state, stateMachine.getRandomJointMove(state));
@@ -293,90 +270,9 @@ public class MSGamer extends StateMachineGamer {
 	return scores;
 }
 
-	@SuppressWarnings("unused")
-	private int goalProximityEval(Role role, MachineState state) throws GoalDefinitionException
-	{
-		return stateMachine.getGoal(state, role);
-	}
-
-
-	private int evalFunction(Role role, MachineState state) throws GoalDefinitionException, MoveDefinitionException
-	{
-		//return monteCarlo(role, state, MonteCarloCount) - 1;
-		//return focusEval(players.get(playerNumber ^ 1), state);
-		return goalProximityEval(role, state);
-	}
-
-	private int minscore(Role role, Move action, MachineState state, int alpha, int beta, int level) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
-	{
-		List<Move> move = new ArrayList<Move>(players.size());
-		for(int i = 0; i < players.size(); i ++)
-		{
-			move.add(null);
-		}
-		return minscore(role, action, state, alpha, beta, move , 0, level);
-	}
-
-	private int minscore(Role role, Move action, MachineState state, int alpha, int beta, List<Move> move, int playerIndex, int level) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
-	{
-		Role opponent = players.get(playerIndex);
-		List<Move> possibleActions;
-		if(opponent.equals(role))
-		{
-			possibleActions = new ArrayList<Move>();
-			possibleActions.add(action);
-		}
-		else
-		{
-			possibleActions = stateMachine.getLegalMoves(state, opponent);
-		}
-		for (int i = 0; i < possibleActions.size(); i++)
-		{
-			if(timedOut())
-			{
-				return beta;
-			}
-			move.set(playerIndex, possibleActions.get(i));
-			if(playerIndex == players.size() - 1)
-			{
-				MachineState newstate = stateMachine.getNextState(state, move);
-
-				int result = maxscore(role, newstate, alpha, beta, level + 1);
-				beta = Math.min(beta, result);
-				if (beta <= alpha) { return alpha; }
-			}
-			else
-			{
-				int result = minscore(role, action, state, alpha, beta, move, playerIndex + 1, level);
-				beta = Math.min(beta, result);
-				if (beta <= alpha) { return alpha; }
-			}
-		}
-		return beta;
-	}
-
-	private int maxscore(Role role, MachineState state, int alpha, int beta, int level) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException
-	{
-		if (stateMachine.isTerminal(state)) {
-			return stateMachine.getGoal(state, role);
-		}
-		if (level >= depthLimit && useDepthLimit) return evalFunction(role, state);
-		List<Move> legalMoves = stateMachine.getLegalMoves(state, role);
-		for (int i = 0; i < legalMoves.size(); i++) {
-			if(timedOut())
-			{
-				return alpha;
-			}
-			int result = minscore(role, legalMoves.get(i), state, alpha, beta, level);
-			alpha = Math.max(alpha, result);
-			if (alpha >= beta) { return beta; }
-		}
-		return alpha;
-
-	}
-
 	public Move getBestMove(Role role, MachineState currentState) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
+		System.out.println("Current State: " + currentState.toString());
 		boolean isChildTree = false;
 		for(GameNode child : gameTree.children)
 		{
@@ -436,32 +332,6 @@ public class MSGamer extends StateMachineGamer {
 			backpropagate(node.parent, scores, node.jointMove);
 		}
 	}
-
-//	private List<Integer> minimaxDepthCharge(GameNode node) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
-//		List<Integer> scores = new ArrayList<Integer>();
-//		scores.add(0);
-//		scores.add(0);
-//		int opponent = playerNumber ^ 1;
-//		for(int i = 0; i < node.children.size(); i++)
-//		{
-//			List<Integer> chargeScores = depthCharge(node.children.get(i).state);
-//			if(node.isMaxNode)
-//			{
-//				if(chargeScores.get(playerNumber) > scores.get(playerNumber))
-//				{
-//					scores = chargeScores;
-//				}
-//			}
-//			else
-//			{
-//				if(chargeScores.get(opponent) > scores.get(opponent))
-//				{
-//					scores = chargeScores;
-//				}
-//			}
-//		}
-//		return scores;
-//	}
 
 	@Override
 	public Move stateMachineSelectMove(long timeout)

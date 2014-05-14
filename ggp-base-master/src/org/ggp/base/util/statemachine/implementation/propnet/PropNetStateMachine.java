@@ -20,13 +20,12 @@ import org.ggp.base.util.statemachine.Move;
 import org.ggp.base.util.statemachine.Role;
 import org.ggp.base.util.statemachine.StateMachine;
 import org.ggp.base.util.statemachine.exceptions.GoalDefinitionException;
-import org.ggp.base.util.statemachine.exceptions.MoveDefinitionException;
 import org.ggp.base.util.statemachine.exceptions.TransitionDefinitionException;
 import org.ggp.base.util.statemachine.implementation.prover.query.ProverQueryBuilder;
 
 
 @SuppressWarnings("unused")
-public class SamplePropNetStateMachine extends StateMachine {
+public class PropNetStateMachine extends StateMachine {
     /** The underlying proposition network  */
     private PropNet propNet;
     /** The topological ordering of the propositions */
@@ -52,6 +51,7 @@ public class SamplePropNetStateMachine extends StateMachine {
 	 */
 	@Override
 	public boolean isTerminal(MachineState state) {
+		setBasesFromState(state);
 		// TODO: Compute whether the MachineState is terminal.
 		return false;
 	}
@@ -77,8 +77,8 @@ public class SamplePropNetStateMachine extends StateMachine {
 	 */
 	@Override
 	public MachineState getInitialState() {
-		// TODO: Compute the initial state.
-		return null;
+		propNet.getInitProposition().setValue(true);
+		return getStateFromBase();
 	}
 
 	/**
@@ -86,8 +86,8 @@ public class SamplePropNetStateMachine extends StateMachine {
 	 */
 	@Override
 	public List<Move> getLegalMoves(MachineState state, Role role)
-	throws MoveDefinitionException {
-		// TODO: Compute legal moves.
+	{
+		setBasesFromState(state);
 		return null;
 	}
 
@@ -97,6 +97,7 @@ public class SamplePropNetStateMachine extends StateMachine {
 	@Override
 	public MachineState getNextState(MachineState state, List<Move> moves)
 	throws TransitionDefinitionException {
+		setBasesFromState(state);
 		// TODO: Compute the next state.
 		return null;
 	}
@@ -184,6 +185,22 @@ public class SamplePropNetStateMachine extends StateMachine {
 		GdlConstant constant = (GdlConstant) relation.get(1);
 		return Integer.parseInt(constant.toString());
 	}
+
+    private void setBasesFromState(MachineState state)
+    {
+    	Set<GdlSentence> stateContent = state.getContents();
+    	Map<GdlSentence, Proposition> propMap = propNet.getBasePropositions();
+    	for (Proposition p : propNet.getBasePropositions().values())
+		{
+			p.setValue(false);
+		}
+    	for(GdlSentence name : stateContent)
+    	{
+    		System.out.println("Setting: " + name.toString());
+    		Proposition p = propMap.get(name);
+    		p.setValue(true);
+    	}
+    }
 
 	/**
 	 * A Naive implementation that computes a PropNetMachineState
