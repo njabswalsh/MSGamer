@@ -1,6 +1,7 @@
 package org.ggp.base.util.statemachine.implementation.propnet;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -77,6 +78,7 @@ public class PropNetStateMachine extends StateMachine {
 	 */
 	@Override
 	public MachineState getInitialState() {
+		System.out.println("getInitialState()");
 		propNet.getInitProposition().setValue(true);
 		return getStateFromBase();
 	}
@@ -87,8 +89,26 @@ public class PropNetStateMachine extends StateMachine {
 	@Override
 	public List<Move> getLegalMoves(MachineState state, Role role)
 	{
+		System.out.println("getLegalMoves()");
 		setBasesFromState(state);
-		return null;
+		Set<Proposition> legalProps = null;
+		for(Role r : roles)
+		{
+			if(role.equals(r))
+			{
+				legalProps = propNet.getLegalPropositions().get(r);
+				break;
+			}
+		}
+		List<Move> legalMoves = new ArrayList<Move>();
+		for(Proposition p : legalProps)
+		{
+			if(p.getValue())
+			{
+				legalMoves.add(getMoveFromProposition(p));
+			}
+		}
+		return legalMoves;
 	}
 
 	/**
@@ -97,9 +117,33 @@ public class PropNetStateMachine extends StateMachine {
 	@Override
 	public MachineState getNextState(MachineState state, List<Move> moves)
 	throws TransitionDefinitionException {
+		setInputFromMoves(moves);
 		setBasesFromState(state);
-		// TODO: Compute the next state.
-		return null;
+		Collection<Proposition> bases = propNet.getBasePropositions().values();
+		Set<GdlSentence> contents = new HashSet<GdlSentence>();
+		for(Proposition p: bases)
+		{
+			if(p.getSingleInput().getSingleInput().getValue())
+			{
+				contents.add(p.getName());
+			}
+		}
+		return new MachineState(contents);
+	}
+
+	private void setInputFromMoves(List<Move> moves) {
+		System.out.println("setInputFromMoves()");
+		List<GdlSentence> sentences = toDoes(moves);
+		Map<GdlSentence, Proposition> inputMap = propNet.getInputPropositions();
+		for(Proposition p: propNet.getInputPropositions().values())
+		{
+			p.setValue(false);
+		}
+		for(GdlSentence sentence: sentences)
+		{
+			System.out.println("Setting: " + sentence);
+			inputMap.get(sentence).setValue(false);
+		}
 	}
 
 	/**
@@ -186,8 +230,10 @@ public class PropNetStateMachine extends StateMachine {
 		return Integer.parseInt(constant.toString());
 	}
 
+    //Not the most efficient implementation
     private void setBasesFromState(MachineState state)
     {
+    	System.out.println("setBasesFromState()");
     	Set<GdlSentence> stateContent = state.getContents();
     	Map<GdlSentence, Proposition> propMap = propNet.getBasePropositions();
     	for (Proposition p : propNet.getBasePropositions().values())
