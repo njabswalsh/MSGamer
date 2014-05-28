@@ -18,8 +18,7 @@ import org.ggp.base.util.statemachine.exceptions.TransitionDefinitionException;
 import org.ggp.base.util.statemachine.implementation.propnet.PropNetStateMachine;
 
 public class MSGamer extends StateMachineGamer {
-
-	private static final long serverTimeBuffer = 1500;
+	private static final long serverTimeBuffer = 2500;
 	private static final boolean debug = false;
 	private static final boolean useDepthLimit = true;
 	private static final int MonteCarloCount = 4;
@@ -41,7 +40,7 @@ public class MSGamer extends StateMachineGamer {
 	{
 		System.out.println("Initialized");
 		return new PropNetStateMachine();
-//		return new ProverStateMachine();
+		//return new ProverStateMachine();
 	}
 
 	@Override
@@ -59,6 +58,13 @@ public class MSGamer extends StateMachineGamer {
 		MachineState initialState = stateMachine.getInitialState();
 		gameTree = new GameNode(initialState, null, null);
 		gameTree.initializeUAMC(players, stateMachine);
+		int nodeCount = 0;
+		while(!timedOut())
+		{
+			iterateMCTS();
+			nodeCount++;
+		}
+		System.out.println("Nodecount: " + nodeCount + " Free memory: " + Runtime.getRuntime().freeMemory());
 		//long averageDepthChargeTime = getAverageDepthChargeTime(numberOfDepthTests, initialState);
 		//long averageMCTSIteration = getAverageMCTSIteration(numberOfDepthTests);
 		//System.out.println("Average Depth Charge: " + averageDepthChargeTime + " Average MCTSIteration: " + averageMCTSIteration);
@@ -273,13 +279,23 @@ public class MSGamer extends StateMachineGamer {
 	public Move getBestMove(Role role, MachineState currentState) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
 		boolean isChildTree = false;
-		for(GameNode child : gameTree.children)
+		if(!gameTree.state.equals(currentState))
 		{
-			if(child.state.equals(currentState))
+			for(GameNode child : gameTree.children)
 			{
-				gameTree = child;
-				isChildTree = true;
+				if(child.state.equals(currentState))
+				{
+					gameTree = child;
+					gameTree.parent = null;
+					isChildTree = true;
+					break;
+				}
 			}
+		}
+		else
+		{
+			isChildTree = true;
+			System.out.println("First turn");
 		}
 		if(!isChildTree)
 		{
@@ -319,15 +335,20 @@ public class MSGamer extends StateMachineGamer {
 			TransitionDefinitionException, GoalDefinitionException {
 		GameNode node = select(gameTree);
 		boolean terminal = expand(node);
-		if(!terminal)
+		if(!terminal) // Fails if first state is terminal (shouldn't be a problem)
 		{
 			List<Move> jointMove = stateMachine.getRandomJointMove(node.state);
+			//System.out.println("Got Joint move. ");
 			List<Integer> scores = depthCharge(stateMachine.getNextState(node.state, jointMove));
 			backpropagate(node, scores, jointMove);
 		}
 		else
 		{
 			List<Integer> scores = getScoresForState(node.state);
+			if(node.parent == null)
+			{
+				System.out.println("issues");
+			}
 			backpropagate(node.parent, scores, node.jointMove);
 		}
 	}
