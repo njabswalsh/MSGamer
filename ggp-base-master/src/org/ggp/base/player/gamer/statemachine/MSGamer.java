@@ -18,14 +18,16 @@ import org.ggp.base.util.statemachine.exceptions.TransitionDefinitionException;
 import org.ggp.base.util.statemachine.implementation.propnet.PropNetStateMachine;
 
 public class MSGamer extends StateMachineGamer {
+	private static final boolean ATTEMPT_TO_TRIM = true;
 	private static final long serverTimeBuffer = 2500;
 	private static final boolean debug = false;
 	private static final boolean useDepthLimit = true;
 	private static final int MonteCarloCount = 4;
 	private static final int depthIncrement = 1;
-	private static final double explorationConstant = 40;
+	private static final double explorationConstant = 30;
 	private static final int nodesPerMetaGameTurn = 0;
 	private static final int numberOfDepthTests = 4;
+	private static int nodesToExpand = 10;
 	private int depthLimit = 200;
 	private long timeout = 0;
 	private List<Role> players;
@@ -34,7 +36,6 @@ public class MSGamer extends StateMachineGamer {
 	private Random r = new Random();
 	private GameNode gameTree;
 	StateMachine stateMachine;
-	StateMachine testStateMachine;
 	@Override
 	public StateMachine getInitialStateMachine()
 	{
@@ -51,13 +52,28 @@ public class MSGamer extends StateMachineGamer {
 		//TODO determine C value/(heuristics?)
 		this.timeout = timeout;
 		stateMachine = getStateMachine();
+		//stateMachine.initialize(getMatch().getGame().getRules(), ATTEMPT_TO_TRIM);
+		//TODO clone original stateMachine for speed
 		players = stateMachine.getRoles();
 		role = getRole();
 		playerNumber = findPlayerNum();
 		if(playerNumber < 0) System.out.println("We've got a problem: role does not exist.");
 		MachineState initialState = stateMachine.getInitialState();
+
 		gameTree = new GameNode(initialState, null, null);
 		gameTree.initializeUAMC(players, stateMachine);
+//		long averageDepthChargeTime = getAverageDepthChargeTime(numberOfDepthTests, initialState);
+//		long averageMCTSIteration = getAverageMCTSIteration(numberOfDepthTests);
+//		System.out.println("Average Depth Charge: " + averageDepthChargeTime + " Average MCTSIteration: " + averageMCTSIteration);
+		//TODO set numNodes to expand
+//		while(!timedOut())
+//		{
+//			if(playGameAgainstSearchlight(40, initialState)) System.out.println("We won!");
+//			else System.out.println("Hmmmmm...");
+//		}
+//
+//		gameTree = new GameNode(initialState, null, null);
+//		gameTree.initializeUAMC(players, stateMachine);
 		int nodeCount = 0;
 		while(!timedOut())
 		{
@@ -65,10 +81,6 @@ public class MSGamer extends StateMachineGamer {
 			nodeCount++;
 		}
 		System.out.println("Nodecount: " + nodeCount + " Free memory: " + Runtime.getRuntime().freeMemory());
-		//long averageDepthChargeTime = getAverageDepthChargeTime(numberOfDepthTests, initialState);
-		//long averageMCTSIteration = getAverageMCTSIteration(numberOfDepthTests);
-		//System.out.println("Average Depth Charge: " + averageDepthChargeTime + " Average MCTSIteration: " + averageMCTSIteration);
-		//playGameAgainstSearchlight(40);
 	}
 
 	private long getAverageMCTSIteration(int n) throws MoveDefinitionException, TransitionDefinitionException, GoalDefinitionException {
@@ -96,15 +108,57 @@ public class MSGamer extends StateMachineGamer {
 		return sum / n;
 	}
 
-	private void playGameAgainstSearchlight(int CValue, MachineState initialState) throws MoveDefinitionException, TransitionDefinitionException, GoalDefinitionException
+	private boolean playGameAgainstSearchlight(int CValue, MachineState initialState) throws MoveDefinitionException, TransitionDefinitionException, GoalDefinitionException
 	{
+		MachineState gameState = initialState;
+		gameTree = new GameNode(initialState, null, null);
+		gameTree.initializeUAMC(players, stateMachine);
+		List<Move> jointMove = new ArrayList<Move>(players.size());
+		for(int i = 0; i < players.size(); i++)
+		{
+			jointMove.add(null);
+		}
+		while(!stateMachine.isTerminal(gameState))
+		{
 
-
+			for(int i = 0; i < players.size(); i++)
+			{
+				if(i == playerNumber)
+				{
+					jointMove.set(i, getMCTSMove(CValue, nodesToExpand, gameState));
+				}
+				else
+				{
+					jointMove.set(i, determineSearchLightMove(players.get(i), gameState));
+				}
+			}
+			gameState = stateMachine.getNextState(gameState, jointMove);
+		}
+		boolean victory = true;
+		int playerScore = stateMachine.getGoal(gameState, role);
+		for(int i = 0; i < players.size(); i++)
+		{
+			if(stateMachine.getGoal(gameState, players.get(i)) > playerScore && i != playerNumber) victory = false;
+		}
+		return victory;
 	}
 
+	private Move getMCTSMove(int cValue, int numNodes, MachineState state) throws MoveDefinitionException, TransitionDefinitionException, GoalDefinitionException {
+		updateGameTree(state);
+		int nodeCount = 0;
+		while(nodeCount < numNodes)
+		{
+			iterateMCTS();
+			nodeCount++;
+		}
+		return getBestMoveFromGameTree(role);
+	}
+
+	//Seperate state machine?
 	private Move determineSearchLightMove(Role role, MachineState state) throws MoveDefinitionException, TransitionDefinitionException, GoalDefinitionException
 	{
-		List<Move> moves = stateMachine.getLegalMoves(state, getRole());
+		StateMachine testStateMachine = null;
+		List<Move> moves = testStateMachine.getLegalMoves(state, getRole());
 		Move selection = (moves.get(new Random().nextInt(moves.size())));
 		List<Move> movesInRandomOrder = new ArrayList<Move>();
 		while(!moves.isEmpty()) {
@@ -114,27 +168,27 @@ public class MSGamer extends StateMachineGamer {
 		}
 		int maxGoal = 0;
 		for(Move moveUnderConsideration : movesInRandomOrder) {
-		    MachineState nextState = stateMachine.getNextState(state, stateMachine.getRandomJointMove(state, role, moveUnderConsideration));
-		    if(stateMachine.isTerminal(nextState)) {
-		        if(stateMachine.getGoal(nextState, getRole()) == 0) {
+		    MachineState nextState = testStateMachine.getNextState(state, testStateMachine.getRandomJointMove(state, role, moveUnderConsideration));
+		    if(testStateMachine.isTerminal(nextState)) {
+		        if(testStateMachine.getGoal(nextState, getRole()) == 0) {
 		            continue;
-		        } else if(stateMachine.getGoal(nextState, getRole()) == 100) {
+		        } else if(testStateMachine.getGoal(nextState, getRole()) == 100) {
 	                selection = moveUnderConsideration;
 	                break;
 		        } else {
-		        	if (stateMachine.getGoal(nextState, getRole()) > maxGoal)
+		        	if (testStateMachine.getGoal(nextState, getRole()) > maxGoal)
 		        	{
 		        		selection = moveUnderConsideration;
-		        		maxGoal = stateMachine.getGoal(nextState, getRole());
+		        		maxGoal = testStateMachine.getGoal(nextState, getRole());
 		        	}
 		        	continue;
 		        }
 		    }
 		    boolean forcedLoss = false;
-		    for(List<Move> jointMove : stateMachine.getLegalJointMoves(nextState)) {
-		        MachineState nextNextState = stateMachine.getNextState(nextState, jointMove);
-		        if(stateMachine.isTerminal(nextNextState)) {
-		            if(stateMachine.getGoal(nextNextState, getRole()) == 0) {
+		    for(List<Move> jointMove : testStateMachine.getLegalJointMoves(nextState)) {
+		        MachineState nextNextState = testStateMachine.getNextState(nextState, jointMove);
+		        if(testStateMachine.isTerminal(nextNextState)) {
+		            if(testStateMachine.getGoal(nextNextState, getRole()) == 0) {
 		                forcedLoss = true;
 		                break;
 		            }
@@ -203,7 +257,8 @@ public class MSGamer extends StateMachineGamer {
 				if(child.jointMove.equals(jointMove))
 				{
 					if(!child.isUAMCInitialized()) child.initializeUAMC(players, stateMachine);
-					return select(child);
+					node = child;
+					break;
 				}
 			}
 		}
@@ -252,32 +307,53 @@ public class MSGamer extends StateMachineGamer {
 
 	private List<Integer> depthCharge(MachineState state) throws GoalDefinitionException, MoveDefinitionException, TransitionDefinitionException {
 		while (!stateMachine.isTerminal(state)) {
+			try
+			{
             state = stateMachine.getNextState(state, stateMachine.getRandomJointMove(state));
+			} catch (Exception e)
+			{
+				System.out.println("Crashing away.");
+			}
 		}
 		List<Integer> scores = getScoresForState(state);
 		return scores;
 	}
 
 	private List<Integer> getScoresForState(MachineState state) {
-	List<Integer> scores = new ArrayList<Integer>();
-	for(int i = 0; i < players.size(); i++)
-	{
-		try
+		List<Integer> scores = new ArrayList<Integer>();
+		for(int i = 0; i < players.size(); i++)
 		{
-			scores.add(stateMachine.getGoal(state, players.get(i)));
+			try
+			{
+				scores.add(stateMachine.getGoal(state, players.get(i)));
+			}
+			catch(GoalDefinitionException e)
+			{
+				System.out.println("Undefined goal");
+				e.printStackTrace();
+				scores.add(50);
+			}
 		}
-		catch(GoalDefinitionException e)
-		{
-			System.out.println("Undefined goal");
-			e.printStackTrace();
-			scores.add(50);
-		}
+		return scores;
 	}
-	return scores;
-}
 
 	public Move getBestMove(Role role, MachineState currentState) throws MoveDefinitionException, GoalDefinitionException, TransitionDefinitionException
 	{
+		updateGameTree(currentState);
+		int nodeCount = 0;
+		while(!timedOut())
+		{
+			iterateMCTS();
+			nodeCount++;
+		}
+		System.out.println("Nodecount: " + nodeCount + " Free memory: " + Runtime.getRuntime().freeMemory());
+		Move bestMove = getBestMoveFromGameTree(role);
+		//TODO change gameTree here
+		return bestMove;
+	}
+
+	private void updateGameTree(MachineState currentState)
+			throws MoveDefinitionException {
 		boolean isChildTree = false;
 		if(!gameTree.state.equals(currentState))
 		{
@@ -295,7 +371,6 @@ public class MSGamer extends StateMachineGamer {
 		else
 		{
 			isChildTree = true;
-			System.out.println("First turn");
 		}
 		if(!isChildTree)
 		{
@@ -303,14 +378,11 @@ public class MSGamer extends StateMachineGamer {
 			gameTree = new GameNode(currentState, null, null);
 			gameTree.initializeUAMC(players, stateMachine);
 		}
-		Move bestMove = stateMachine.getRandomMove(currentState, role);
-		int nodeCount = 0;
-		while(!timedOut())
-		{
-			iterateMCTS();
-			nodeCount++;
-		}
-		System.out.println("Nodecount: " + nodeCount + " Free memory: " + Runtime.getRuntime().freeMemory());
+	}
+
+	private Move getBestMoveFromGameTree(Role role)
+			throws MoveDefinitionException {
+		Move bestMove = null;
 		double bestScore = -1;
 		int bestMoveVisits = 0;
 		TreeMap<Move, Pair<Long, Integer> > movesToUtils = gameTree.utilitiesAndMoveCounts.get(playerNumber);
@@ -327,7 +399,6 @@ public class MSGamer extends StateMachineGamer {
 				bestMoveVisits = visits;
 			}
 		}
-		//TODO change gameTree here
 		return bestMove;
 	}
 
